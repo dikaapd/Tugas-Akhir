@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
@@ -18,18 +18,10 @@ class BeasiswaController extends Controller
      */
     public function index()
     {
-        try {
         $data = Beasiswa::all();
 
-        if($data){
-            return ApiFormatter::createApi(200, 'Succes', $data);
-        } else {
-            return ApiFormatter::createApi(400, 'Failed');
-
-        }
-    } catch(Exception $error) {
-        return ApiFormatter::createApi(400, 'Failed');
-    }
+            return view('Beasiswa.dashboard', compact('data'));
+    
     }
 
     /**
@@ -40,6 +32,7 @@ class BeasiswaController extends Controller
     public function create()
     {
         //
+        return view('beasiswa.create');
     }
 
     /**
@@ -50,7 +43,6 @@ class BeasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        try {
             $request->validate([
                 'nim' => 'required',
                 'nama_mhs' => 'required',
@@ -69,17 +61,7 @@ class BeasiswaController extends Controller
                 'slip_gaji' => $request->slip_gaji,
             ]);
 
-            $data = Beasiswa::where('id','=', $form_pengajuan_beasiswa->id)->get();
-
-            if($data){
-                return ApiFormatter::createApi(200, 'Succes', $data);
-            } else {
-                return ApiFormatter::createApi(400, 'Failed');
-
-            }
-        } catch(Exception $error) {
-            return ApiFormatter::createApi(400, 'Failed');
-        }
+           return redirect('beasiswa') ;
     }
 
     /**

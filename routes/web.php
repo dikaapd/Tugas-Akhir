@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +15,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+//Beasiswa
+//Route::get('/beasiswa/dashboard', function () {
+  //  return view('Beasiswa/dashboard');
+//});
+
+route::get('/beasiswa/create', [App\Http\Controllers\BeasiswaController::class, 'create']);
+
+route::post('/beasiswa/store ' , [App\Http\Controllers\BeasiswaController::class, 'store']);
+
+//AdminBeasiswa
+
+route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
+
+route::get('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'show']);
+
+route::get('/beasiswa/{id}/edit', 'BeasiswaController@edit');
+route::put('/beasiswa/{id}', 'BeasiswaController@update');
+route::delete('/beasiswa/{beasiswaid}', 'BeasiswaController@destroy');
+
