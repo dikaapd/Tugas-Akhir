@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Beasiswa;
 use Exception;
@@ -72,14 +73,9 @@ class BeasiswaController extends Controller
      */
     public function show($id)
     {
-        $data = Beasiswa::where('id','=', $id)->get();
-
-            if($data){
-                return ApiFormatter::createApi(200, 'Succes', $data);
-            } else {
-                return ApiFormatter::createApi(400, 'Failed');
-
-            }
+        //$data = Beasiswa::where('id','=', $id)->get();
+        $data = DB::table('form_pengajuan_beasiswa')->where('id', $id)->first();
+        return view('beasiswa.show', compact('data'));
     }
 
     /**
@@ -90,7 +86,8 @@ class BeasiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = DB::table('form_pengajuan_beasiswa')->where('id', $id)->first();
+        return view('beasiswa.edit', compact('data'));
     }
 
     /**
@@ -100,9 +97,8 @@ class BeasiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        try {
             $request->validate([
                 'nim' => 'required',
                 'nama_mhs' => 'required',
@@ -112,9 +108,10 @@ class BeasiswaController extends Controller
                 'slip_gaji' => 'required'
             ]);
 
-            $form_pengajuan_beasiswa = Beasiswa::findOrFail($id);
+            //$form_pengajuan_beasiswa = Beasiswa::findOrFail($id);
 
-            $form_pengajuan_beasiswa -> update([
+            DB::table('form_pengajuan_beasiswa') -> where('id', $id) 
+            -> update([
                 'nim' => $request->nim,
                 'nama_mhs' => $request->nama_mhs,
                 'jurusan' => $request->jurusan,
@@ -123,17 +120,7 @@ class BeasiswaController extends Controller
                 'slip_gaji' => $request->slip_gaji,
             ]);
 
-            $data = Beasiswa::where('id','=', $form_pengajuan_beasiswa->id)->get();
-
-            if($data){
-                return ApiFormatter::createApi(200, 'Succes', $data);
-            } else {
-                return ApiFormatter::createApi(400, 'Failed');
-
-            }
-        } catch(Exception $error) {
-            return ApiFormatter::createApi(400, 'Gagal');
-        }
+            return redirect ('beasiswa') ;
     }
 
     /**
@@ -144,29 +131,16 @@ class BeasiswaController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            $data = Beasiswa::findOrFail($id);
-            $data = $data->delete();
+       
+           // $data = Beasiswa::findOrFail($id);
+            //$data = $data->delete();
+            $data = DB::table('form_pengajuan_beasiswa')->where('id', '=' , $id)->delete();
+            return redirect ('beasiswa') ;
 
-            if($data){
-                return ApiFormatter::createApi(200, 'Succes Destroy Data');
-            } else {
-                return ApiFormatter::createApi(400, 'Failed');
-            }
-        } catch (Exception $error) {
-            return ApiFormatter::createApi(400, 'Failed');
-        }
     }
 
     public function search($nim)
     {
         $data = Beasiswa::where('nim','=', $nim)->get();
-
-            if($data){
-                return ApiFormatter::createApi(200, 'Succes', $data = Beasiswa::all());
-            } else {
-                return ApiFormatter::createApi(400, 'Failed');
-
-            }
     }
 }

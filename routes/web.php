@@ -32,7 +32,7 @@ route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index
 
 route::get('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'show']);
 
-route::get('/beasiswa/{id}/edit', 'BeasiswaController@edit');
-route::put('/beasiswa/{id}', 'BeasiswaController@update');
-route::delete('/beasiswa/{beasiswaid}', 'BeasiswaController@destroy');
+route::get('/beasiswa/{id}/edit', [App\Http\Controllers\BeasiswaController::class, 'edit']);
+route::put('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'update'])->name('update_data');
+route::delete('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class,'destroy']);
 
