@@ -30,7 +30,7 @@
     <!-- END: Content-->
 
     <!-- BEGIN: Footer-->
-   {{-- / @include('templates.includesbeasiswa.footer') --}}
+    @include('templates.includesbeasiswa.footer')
     <!-- END: Footer-->
 
   </div>

@@ -16,8 +16,14 @@
         <div class="sidebar-body">
             <ul class="sidebar-body-menu">
                 <li>
-                    <a class="active" href="{{url('/beasiswa')}}"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
+                    <a class="active" href="{{url('/')}}"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
                 </li>
+                @if (auth()->user()->level=="admin")
+                <li>
+                    <a class="active" href="{{url('/beasiswa')}}">
+                        <span class="" aria-hidden="true"></span>List Pendaftar</a>
+                </li>
+                @endif
                 <li>
                     <a class="active" href="{{url('/beasiswa/create')}}">
                         <span class="icon document" aria-hidden="true"></span>Ajukan Beasiswa</a>
@@ -25,12 +31,12 @@
             </ul>
         </div>
     <div class="sidebar-footer">
-        <a href="##" class="sidebar-user">
+        <a href="#" class="sidebar-user">
             <span class="sidebar-user-img">
                 <picture><source srcset="{{ asset('assets/img/avatar/avatar-illustrated-01.webp')}}" type="image/webp"><img src="{{ asset('assets/img/avatar/avatar-illustrated-01.png')}}" alt="User name"></picture>
             </span>
             <div class="sidebar-user-info">
-                <span class="sidebar-user__subtitle">Admin</span>
+                <span class="sidebar-user__subtitle">{{auth()->user()->nama }}</span>
             </div>
         </a>
     </div>

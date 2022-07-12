@@ -1,9 +1,7 @@
 @extends('templates.includesbeasiswa.app')
 @section('content')
      Halaman Dashboard
-
-     Halaman List Cast
-
+     
 <table class="table table-striped">
   <thead>
     <tr>
