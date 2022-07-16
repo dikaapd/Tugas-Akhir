@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/daftar', function () {
+  return view('create');
+})-> name('create');
+
 Route::get('/login', function () {
     return view('auth.login');
 })-> name('login');

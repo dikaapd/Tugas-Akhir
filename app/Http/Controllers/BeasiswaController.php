@@ -139,8 +139,8 @@ class BeasiswaController extends Controller
 
     }
 
-    public function search($nim)
-    {
-        $data = Beasiswa::where('nim','=', $nim)->get();
-    }
+    //public function search($nim)
+   // {
+        //$data = Beasiswa::where('nim','=', $nim)->get();
+    //}
 }

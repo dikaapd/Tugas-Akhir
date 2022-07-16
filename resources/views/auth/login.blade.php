@@ -1,86 +1,73 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Log in</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Kemahasiswaan Politeknik TEDC Bandung</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{{asset('layout/vendors/feather/feather.css')}}">
+  <link rel="stylesheet" href="{{asset('layout/vendors/ti-icons/css/themify-icons.css')}}">
+  <link rel="stylesheet" href="{{asset('layout/vendors/css/vendor.bundle.base.css')}}">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{{asset('layout/css/vertical-layout-light/style.css')}}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{{asset('layout/images/favicon.png')}}" />
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <b>Login</b>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="{{ route('postlogin')}}" method="post">
-        {{ csrf_field() }}
-        <div class="input-group mb-3">
-          <input type="username" class="form-control" name="username" placeholder="Username">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+<body>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <img src="{{asset('layout/images/logo.svg')}}" alt="logo">
+              </div>
+              <form action="{{ route('postlogin')}}" method="post">
+                {{ csrf_field() }}
+              <h4>Selamat Datang </h4>
+              <h6 class="font-weight-light">Login Untuk Melanjutkan.</h6>
+              <form class="pt-3">
+                <div class="form-group">
+                  <input type="username" class="form-control form-control-lg" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control form-control-lg" name="password" placeholder="Password">
+                </div>
+                <div class="mt-3">
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Masuk</button>
+                </div>
+                <div class="text-center mt-4 font-weight-light">
+                  Belum Mempunyai Akun ? <a href="{{url('/registrasi')}}" class="text-primary">Create</a>
+                </div>
+              </form>
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Remember Me
-              </label>
-            </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-          </div>
-          <!-- /.col -->
-        </div>
-      </form>
-      <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
-      </p>
-      <p class="mb-0">
-        <a href="{{url('/registrasi')}}" class="text-center">Register a new membership</a>
-      </p>
+      </div>
+      <!-- content-wrapper ends -->
     </div>
-    <!-- /.login-card-body -->
+    <!-- page-body-wrapper ends -->
   </div>
-</div>
-<!-- /.login-box -->
-
-<!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
-
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="{{asset('layout//vendors/js/vendor.bundle.base.js')}}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="{{asset('layout/js/off-canvas.js')}}"></script>
+  <script src="{{asset('layout/js/hoverable-collapse.js')}}"></script>
+  <script src="{{asset('layout/js/template.js')}}"></script>
+  <script src="{{asset('layout/js/settings.js')}}"></script>
+  <script src="{{asset('layout//js/todolist.js')}}"></script>
+  <!-- endinject -->
 </body>
+
 </html>

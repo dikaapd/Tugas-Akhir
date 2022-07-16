@@ -1,1 +1,1 @@
-@extends('templates.includesbeasiswa.app')
+@extends('template.app')

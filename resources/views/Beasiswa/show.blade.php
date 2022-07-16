@@ -1,4 +1,4 @@
-@extends('templates.includesbeasiswa.app')
+@extends('template.app')
 
 @section ('content')
 
