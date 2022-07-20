@@ -20,8 +20,7 @@ use App\Http\Controllers\BeasiswaController;
   //  return $request->user();
 //});
 
-Route::prefix('api/v1')->group(function () {
-  Route::get('beasiswa', [ApiBeasiswaController::class, 'index']);
+Route::get('beasiswa', [ApiBeasiswaController::class, 'index']);
 
 Route::POST('beasiswa', [ApiBeasiswaController::class, 'store'])->name('tambah_data');
 Route::get('beasiswa/show/{id}', [ApiBeasiswaController::class, 'show']);
@@ -31,9 +30,3 @@ Route::get('beasiswa/destroy/{id}', [ApiBeasiswaController::class, 'destroy']);
 //Register & Login Untuk di android
 Route::post('beasiswauser/register', [UserBeasiswaController::class, 'register']);
 Route::post('beasiswauser/login', [UserBeasiswaController::class, 'login']);
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-});

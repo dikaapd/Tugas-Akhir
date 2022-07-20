@@ -17,7 +17,7 @@ class CreateFormPengajuanBeasiswaTable extends Migration
             $table->id();
             $table->string('nim');
             $table->string('nama_mhs');
-            $table->string('jurusan');
+            $table->string('jurusan_id');
             $table->string('gaji_ortu');
             $table->string('tanggungan');
             $table->string('slip_gaji');

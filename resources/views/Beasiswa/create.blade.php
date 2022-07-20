@@ -30,28 +30,30 @@
               <div class="form-group">
             <form class="forms-sample">
                 <label for="exampleInputName1">NIM</label>
-                <input type="text" class="form-control" name="nim" placeholder="Nim">
+                <input type="text" class="form-control" name="nim" id="nim" placeholder="Nim">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail3">Nama</label>
-                <input type="text" class="form-control" name="nama_mhs" placeholder="Nama Lengkap">
+                <input type="text" class="form-control" name="nama_mhs" id="nama_mhs" placeholder="Nama Lengkap">
               </div>
               <div class="form-group">
-                <label for="exampleSelectGender">Prodi</label>
-                  <select class="form-control" name="jurusan">
-                    <option value="IF">IF</option>
-                    <option value="AK">AK</option>
+                <label for="exampleSelectGender">Pilih Prodi</label>
+                  <select class="form-control" name="jurusan_id" id="jurusan_id">
+                    <option disable value> Prodi</option>
+                    @foreach ($jurusan as $item)
+                    <option value="{{$item->id}}">{{$item->jurusan}}</option>
+                    @endforeach
                   </select>
                 </div>
               <div class="form-group">
                 <label for="exampleInputGaji">Gaji Orang Tua</label>
-                <input type="text" class="form-control" name="gaji_ortu" placeholder="Gaji">
+                <input type="text" class="form-control" name="gaji_ortu" id="gaji_ortu" placeholder="Gaji">
               </div>
               
               <div class="form-group">
                 <label>File upload</label>
                 <div class="input-group col-xs-12">
-                  <input type="file" name="file" class="form-control file-upload-info"  placeholder="Upload Image">
+                  <input type="file" name="file" id="file" class="form-control file-upload-info"  placeholder="Upload Image">
                   <span class="input-group-append">
                     <button class="file-upload-browse btn btn-primary" type="button">Upload Struk Gaji</button>
                   </span>
@@ -59,7 +61,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputCity1">Tannggungan</label>
-                <input type="text" class="form-control" name="tanggungan" placeholder="Tanggungan">
+                <input type="text" class="form-control" name="tanggungan"  id="tanggungan" placeholder="Tanggungan">
               </div>
               <button type="submit" class="btn btn-primary mr-2">Submit</button>
             </form>

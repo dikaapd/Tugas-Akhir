@@ -17,7 +17,7 @@
             <td>{{$key + 1}} </td>
             <td>{{$item->nim}} </td>
             <td>{{$item->nama_mhs}} </td>
-            <td>{{$item->jurusan}} </td>
+            <td>{{$item->jurusan->jurusan}} </td>
             <td>
                 
                 <form action="/beasiswa/{{$item->id}}" method="POST">

@@ -14,10 +14,15 @@ class Beasiswa extends Model
     protected $fillable = [
         'nim',
         'nama_mhs',
-        'jurusan',
+        'jurusan_id',
         'gaji_ortu',
         'tanggungan',
         'slip_gaji',
     ];
     protected $hidden = [];
+
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class);
+    }
 }

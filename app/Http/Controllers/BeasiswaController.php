@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Jurusan;
 use App\Models\Beasiswa;
 use Exception;
 use Illuminate\Http\Request;
@@ -20,8 +20,7 @@ class BeasiswaController extends Controller
     public function index()
     {
         $data = Beasiswa::all();
-
-            return view('Beasiswa.dashboard', compact('data'));
+        return view('Beasiswa.dashboard', compact('data'));
     
     }
 
@@ -33,7 +32,8 @@ class BeasiswaController extends Controller
     public function create()
     {
         //
-        return view('beasiswa.create');
+        $jurusan = Jurusan::all();
+        return view('beasiswa.create' , compact('jurusan'));
     }
 
     /**
@@ -47,7 +47,7 @@ class BeasiswaController extends Controller
             $request->validate([
                 'nim' => 'required',
                 'nama_mhs' => 'required',
-                'jurusan' => 'required',
+                'jurusan_id' => 'required',
                 'gaji_ortu' => 'required',
                 'tanggungan' => 'required',
                 'file' => 'required|mimes:png,jpeg,jpg|max:2048'
@@ -61,7 +61,7 @@ class BeasiswaController extends Controller
             $form_pengajuan_beasiswa = Beasiswa::create([
                 'nim' => $request->nim,
                 'nama_mhs' => $request->nama_mhs,
-                'jurusan' => $request->jurusan,
+                'jurusan_id' => $request->jurusan_id,
                 'gaji_ortu' => $request->gaji_ortu,
                 'tanggungan' => $request->tanggungan,
                 'slip_gaji' => $fileName,

@@ -36,7 +36,6 @@ class LoginController extends Controller
             'nama' => $request->nama,
             'username' => $request->username,
             'password' => bcrypt($request->password),
-            'level' => 'mahasiswa',
             'remember_token' => Str::random(60),
         ]);
 

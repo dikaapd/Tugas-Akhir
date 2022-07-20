@@ -19,6 +19,7 @@ class UserBeasiswaController extends Controller
     public function register(Request $req)
     {
         $rules=[
+            'nama' => 'required',
             'username' => 'required|string|unique:users',
             'password' => 'required|string|min:6'
         ];
@@ -28,6 +29,7 @@ class UserBeasiswaController extends Controller
         }
 
         $user = User::create([
+            'nama' => $req->nama,
             'username' => $req->username,
             'password' => Hash::make($req->password)
         ]);
