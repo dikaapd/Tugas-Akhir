@@ -50,8 +50,13 @@ class BeasiswaController extends Controller
                 'jurusan' => 'required',
                 'gaji_ortu' => 'required',
                 'tanggungan' => 'required',
-                'slip_gaji' => 'required'
+                'file' => 'required|mimes:png,jpeg,jpg|max:2048'
             ]);
+                
+        $fileName = date('d-m-Y').'_'.$request->file('file')->getClientOriginalName();  
+        $path = $request->file->move(public_path('upload'), $fileName);
+         
+
 
             $form_pengajuan_beasiswa = Beasiswa::create([
                 'nim' => $request->nim,
@@ -59,10 +64,10 @@ class BeasiswaController extends Controller
                 'jurusan' => $request->jurusan,
                 'gaji_ortu' => $request->gaji_ortu,
                 'tanggungan' => $request->tanggungan,
-                'slip_gaji' => $request->slip_gaji,
+                'slip_gaji' => $fileName,
             ]);
 
-           return redirect('beasiswa') ;
+           return redirect('beasiswa') -> with("Success", "Data Berhasil Di Input") ;
     }
 
     /**
@@ -105,11 +110,24 @@ class BeasiswaController extends Controller
                 'jurusan' => 'required',
                 'gaji_ortu' => 'required',
                 'tanggungan' => 'required',
-                'slip_gaji' => 'required'
+                'file' => 'required|mimes:png,jpeg,jpg|max:2048'
             ]);
 
-            //$form_pengajuan_beasiswa = Beasiswa::findOrFail($id);
+            $Beasiswa = Beasiswa::where('id', $id)->first();    
+            if($request->file){
+                  // $request->file->unlink(public_path('upload'), $Beasiswa->slip_gaji);
+                   $file_path = public_path().'/upload/'.$Beasiswa->slip_gaji;
+                   unlink($file_path);
+                 $fileName = date('d-m-Y').'_'.$request->file('file')->getClientOriginalName();  
+                $path = $request->file->move(public_path('upload'), $fileName);
+            }
+                
+        
 
+           // $mhs = Beasiswa::find($id);
+
+           // $mhs = pengajuan::leftjoin('prodi', 'prodi.id_prodi', '=' , 'pengajuan.id_prodi')->where('status', 1) ->where('id_prodi', auth()->user()->id_prodi) -> get();
+            //
             DB::table('form_pengajuan_beasiswa') -> where('id', $id) 
             -> update([
                 'nim' => $request->nim,
@@ -117,7 +135,7 @@ class BeasiswaController extends Controller
                 'jurusan' => $request->jurusan,
                 'gaji_ortu' => $request->gaji_ortu,
                 'tanggungan' => $request->tanggungan,
-                'slip_gaji' => $request->slip_gaji,
+                'slip_gaji' => $fileName,
             ]);
 
             return redirect ('beasiswa') ;
@@ -134,13 +152,16 @@ class BeasiswaController extends Controller
        
            // $data = Beasiswa::findOrFail($id);
             //$data = $data->delete();
-            $data = DB::table('form_pengajuan_beasiswa')->where('id', '=' , $id)->delete();
+            $data = DB::table('form_pengajuan_beasiswa')->where('id', '=' , $id);
+            $file_path = public_path().'/upload/'.$data->first()->slip_gaji;
+            unlink($file_path);
+            $data->delete();
             return redirect ('beasiswa') ;
-
+           
     }
 
     //public function search($nim)
-   // {
+   // {s
         //$data = Beasiswa::where('nim','=', $nim)->get();
     //}
 }

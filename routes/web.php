@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/daftar', function () {
-  return view('create');
-})-> name('create');
+  return view('welcome');
+})-> name('welcome');
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -27,7 +27,7 @@ route::post('/postregistrasi', [App\Http\Controllers\LoginController::class, 'po
 //Beasiswa
 
 
-Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() {
+Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() { 
 route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
 
 route::get('/beasiswa/{id}/edit', [App\Http\Controllers\BeasiswaController::class, 'edit']);

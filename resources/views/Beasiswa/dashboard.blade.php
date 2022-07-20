@@ -26,6 +26,7 @@
                     <a href="/beasiswa/{{$item->id}}" class="btn btn-info btn-sm">Detail</a>
                 <a href="/beasiswa/{{$item->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
                     <input type="submit" class="btn btn-warning btn-sm" value="Delete">
+                    
                 </form>
             </td>
         </tr>
