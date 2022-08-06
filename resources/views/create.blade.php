@@ -1,7 +1,6 @@
+@extends('template.app')
 
-<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <!-- Plugin css for this page -->
+ {{-- <!-- Plugin css for this page -->
  <link rel="stylesheet" href="{{asset('layout/vendors/feather/feather.css')}}">
  <link rel="stylesheet" href="{{asset('layout/vendors/ti-icons/css/themify-icons.css')}}">
  <link rel="stylesheet" href="{{asset('layout/vendors/css/vendor.bundle.base.css')}}">
@@ -15,9 +14,9 @@
  <link rel="stylesheet" href="{{asset('layout/vendors/select2/select2.min.css')}}">
  <link rel="stylesheet" href="{{asset('layout/vendors/select2-bootstrap-theme/select2-bootstrap.min.css')}}">
  <!-- End plugin css for this page -->
- <!-- inject:css -->
+ <!-- inject:css --> --}}
 
-    
+ @section('content')
       <div class="col-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
@@ -71,6 +70,7 @@
 </div>
 <!-- page-body-wrapper ends -->
 </div>  
+@endsection
    <!-- Plugin js for this page -->
    <script src="{{asset('layout/vendors/js/vendor.bundle.base.js')}}"></script>
    <script src="{{asset('layout/vendors/typeahead.js/typeahead.bundle.min.js')}}"></script>

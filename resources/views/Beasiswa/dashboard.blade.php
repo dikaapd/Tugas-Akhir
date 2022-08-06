@@ -19,15 +19,19 @@
             <td>{{$item->nama_mhs}} </td>
             <td>{{$item->jurusan->jurusan}} </td>
             <td>
-                
+              <a class="btn btn-warning btn-sm" href="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}"
+                onclick="event.preventDefault();
+                document.getElementById('ajukan-form').submit();" >
+                Ajukan
+             </a>
+             <form id="ajukan-form" action="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
+               @csrf
+               </form>
                 <form action="/beasiswa/{{$item->id}}" method="POST">
                     @csrf
                     @method('delete')
-                    <a href="/beasiswa/{{$item->id}}" class="btn btn-info btn-sm">Detail</a>
-                <a href="/beasiswa/{{$item->id}}/edit" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/beasiswa/{{$item->id}}" class="btn btn-info btn-sm">Detail & Edit</a>
                     <input type="submit" class="btn btn-warning btn-sm" value="Delete">
-                    <a href="/download/{{$item->file}}" class="btn btn-warning btn-sm">Download</a>
-                    
                 </form>
             </td>
         </tr>

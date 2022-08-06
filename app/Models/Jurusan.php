@@ -12,7 +12,7 @@ class Jurusan extends Model
     protected $primaryKey = "id" ;
     protected $fillable = [
         'id',
-        'jabatan',
+        'jurusan',
     ];
 
     public function beasiswa()
