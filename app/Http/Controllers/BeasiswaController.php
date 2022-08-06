@@ -79,6 +79,7 @@ class BeasiswaController extends Controller
     public function show($id)
     {
         //$data = Beasiswa::where('id','=', $id)->get();
+        $jurusan = Jurusan::all();
         $data = DB::table('form_pengajuan_beasiswa')->where('id', $id)->first();
         return view('beasiswa.show', compact('data'));
     }
@@ -91,8 +92,9 @@ class BeasiswaController extends Controller
      */
     public function edit($id)
     {
-        $data = DB::table('form_pengajuan_beasiswa')->where('id', $id)->first();
-        return view('beasiswa.edit', compact('data'));
+        $jurusan = Jurusan::all();
+        $data = DB::table('form_pengajuan_beasiswa' )->where('id', $id)->first();
+        return view('beasiswa.edit', compact('data' , 'jurusan'));
     }
 
     /**
@@ -107,12 +109,12 @@ class BeasiswaController extends Controller
             $request->validate([
                 'nim' => 'required',
                 'nama_mhs' => 'required',
-                'jurusan' => 'required',
+                'jurusan_id' => 'required',
                 'gaji_ortu' => 'required',
                 'tanggungan' => 'required',
-                'file' => 'required|mimes:png,jpeg,jpg|max:2048'
+                'file' => 'mimes:png,jpeg,jpg|max:2048'
             ]);
-
+            $jurusan = Jurusan::all();
             $Beasiswa = Beasiswa::where('id', $id)->first();    
             if($request->file){
                   // $request->file->unlink(public_path('upload'), $Beasiswa->slip_gaji);
@@ -128,11 +130,12 @@ class BeasiswaController extends Controller
 
            // $mhs = pengajuan::leftjoin('prodi', 'prodi.id_prodi', '=' , 'pengajuan.id_prodi')->where('status', 1) ->where('id_prodi', auth()->user()->id_prodi) -> get();
             //
+            $jurusan = Jurusan::all();
             DB::table('form_pengajuan_beasiswa') -> where('id', $id) 
             -> update([
                 'nim' => $request->nim,
                 'nama_mhs' => $request->nama_mhs,
-                'jurusan' => $request->jurusan,
+                'jurusan_id' => $request->jurusan_id,
                 'gaji_ortu' => $request->gaji_ortu,
                 'tanggungan' => $request->tanggungan,
                 'slip_gaji' => $fileName,
@@ -158,6 +161,11 @@ class BeasiswaController extends Controller
             $data->delete();
             return redirect ('beasiswa') ;
            
+    }
+
+    public function download(Request $request,$file)
+    {
+        return response()->download(public_path('upload'.$file));
     }
 
     //public function search($nim)

@@ -20,7 +20,6 @@
  <!-- inject:css -->
  @section('content')
  
-
       <div class="col-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
@@ -39,7 +38,7 @@
               <div class="form-group">
                 <label for="exampleSelectGender">Pilih Prodi</label>
                   <select class="form-control" name="jurusan_id" id="jurusan_id">
-                    <option disable value> Prodi</option>
+                    <option disable value> Prodi </option>
                     @foreach ($jurusan as $item)
                     <option value="{{$item->id}}">{{$item->jurusan}}</option>
                     @endforeach

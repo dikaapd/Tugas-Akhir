@@ -27,16 +27,17 @@ route::post('/postregistrasi', [App\Http\Controllers\LoginController::class, 'po
 //Beasiswa
 
 
-Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() { 
+Route::group(['middleware' => ['auth', 'ceklevel:admin,prodi']], function() { 
 route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
 
 route::get('/beasiswa/{id}/edit', [App\Http\Controllers\BeasiswaController::class, 'edit']);
 route::put('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'update'])->name('update_data');
 route::delete('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class,'destroy']);
+Route::get('/download/{file}', [App\Http\Controllers\BeasiswaController::class, 'download']);
 
 });
 
-Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa']], function() {
+Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi']], function() {
   Route::get('/', function () {
     return view('Beasiswa/home');
   });
