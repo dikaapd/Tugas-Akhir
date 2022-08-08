@@ -54,9 +54,25 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,']], func
 });
 
 //Proposal 
-
-//
+Route::group(['middleware' => ['auth', 'ceklevel:admin_mhs']], function() {
     
+  route::get('/proposal',  [App\Http\Controllers\ProposalController::class, 'index']);
+
+  route::get('/proposal/create', [App\Http\Controllers\ProposalController::class, 'create']);
+  route::post('/proposal/store', [App\Http\Controllers\ProposalController::class, 'store']);
+  route::get('/proposal/{id}/edit', [App\Http\Controllers\ProposalController::class, 'edit']);
+  route::put('/proposal/{id}', [App\Http\Controllers\ProposalController::class, 'update'])->name('ubah_data');
+  route::delete('/proposal/{id}', [App\Http\Controllers\ProposalController::class,'destroy']);
+  
+});
+//
+Route::group(['middleware' => ['auth', 'ceklevel:admin_mhs,bem,ormawa,']], function() {
+  route::get('/proposal/create', [App\Http\Controllers\ProposalController::class, 'create']);
+ route::post('/proposal/store ' , [App\Http\Controllers\ProposalController::class, 'store']);
+ route::get('/proposal/{id}', [App\Http\Controllers\ProposalController::class, 'show']);
+
+});
+
 route::get('/proposal',  [App\Http\Controllers\ProposalController::class, 'index']);
 
 route::get('/proposal/create', [App\Http\Controllers\ProposalController::class, 'create']);

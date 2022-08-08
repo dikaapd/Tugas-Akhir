@@ -5,10 +5,10 @@
 @csrf
 @method('put')
   <div class="form-group">
-    <label>Id Ormawa</label>
-    <input type="text" class="form-control" name="id_ormawa">
+    <label>Ormawa_Id</label>
+    <input type="text" class="form-control" name="ormawa_id">
   </div>
-  @error('id_ormawa')
+  @error('ormawa_id')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
   <div class="form-group">
@@ -34,9 +34,9 @@
 @enderror
 <div class="form-group">
     <label>Tanggal Kegiatan</label>
-    <input type="date" class="form-control" name="tgl_kegiatan"></textarea>
+    <input type="dateTime" class="form-control" name="tanggal_kegiatan"></textarea>
   </div>
-  @error('tgl_kegiatan')
+  @error('tanggal_kegiatan')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 <div class="form-group">
@@ -47,10 +47,10 @@
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 <div class="form-group">
-    <label>File</label>
-    <input type="string" class="form-control" name="file"></textarea>
+    <label>Lampiran</label>
+    <input type="string" class="form-control" name="lampiran"></textarea>
   </div>
-  @error('file')
+  @error('lampiran')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
   <button type="submit" class="btn btn-primary">Submit</button>

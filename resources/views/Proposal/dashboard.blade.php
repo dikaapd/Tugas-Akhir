@@ -15,7 +15,7 @@
     @forelse ($data as $key => $item )
         <tr>
             <td>{{$key + 1}} </td>
-            <td>{{$item->id_ormawa}} </td>
+            <td>{{$item->ormawa_id} </td>
             <td>{{$item->nama_kegiatan}} </td>
             <td>{{$item->jenis_kegiatan}} </td>
             <td>

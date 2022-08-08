@@ -4,10 +4,10 @@
 <form action="{{URL('proposal/store')}}" method="POST">
 @csrf
 <div class="form-group">
-    <label>Id Ormawa</label>
-    <input type="text" class="form-control" name="id_ormawa">
+    <label>Ormawa Id</label>
+    <input type="unsignedInteger" class="form-control" name="ormawa_id">
   </div>
-  @error('id_ormawa')
+  @error('ormawa_id')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
   <div class="form-group">
@@ -33,23 +33,23 @@
 @enderror
 <div class="form-group">
     <label>Tanggal Kegiatan</label>
-    <input type="date" class="form-control" name="tgl_kegiatan"></textarea>
+    <input type="dateTime" class="form-control" name="tanggal_kegiatan"></textarea>
   </div>
-  @error('tgl_kegiatan')
+  @error('tanggal_kegiatan')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 <div class="form-group">
     <label >Total Dana</label>
-    <input type="text" class="form-control" name="total_dana"></textarea>
+    <input type="double" class="form-control" name="total_dana"></textarea>
   </div>
   @error('total_dana')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 <div class="form-group">
-    <label>File</label>
-    <input type="string" class="form-control" name="file"></textarea>
+    <label>Lampiran</label>
+    <input type="string" class="form-control" name="lampiran"></textarea>
   </div>
-  @error('file')
+  @error('lampiran')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
   <button type="submit" class="btn btn-primary">Submit</button>

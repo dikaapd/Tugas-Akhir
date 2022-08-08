@@ -12,13 +12,13 @@ class Proposal extends Model
     protected $table = 'pengajuan_ormawa';
     protected $primary = 'id';
     protected $fillable = [
-        'id_ormawa',
+        'ormawa_id',
         'nama_kegiatan',
         'jenis_kegiatan',
         'tema_kegiatan',
-        'tgl_kegiatan',
+        'tanggal_kegiatan',
         'total_dana',
-        'file',
+        'lampiran',
     ];
 
     protected$hidden = [];

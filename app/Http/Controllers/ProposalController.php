@@ -45,23 +45,23 @@ class ProposalController extends Controller
     public function store(Request $request)
     {
             $request->validate([
-                'id_ormawa' => 'required',
+                'ormawa_id' => 'required',
                 'nama_kegiatan' => 'required',
                 'jenis_kegiatan' => 'required',
                 'tema_kegiatan' => 'required',
-                'tgl_kegiatan' => 'required',
+                'tanggal_kegiatan' => 'required',
                 'total_dana' => 'required',
-                'file' => 'required'
+                'lampiran' => 'required'
             ]);
 
             $data = Proposal::create([
-                'id_ormawa' => $request->id_ormawa,
+                'ormawa_id' => $request->ormawa_id,
                 'nama_kegiatan' => $request->nama_kegiatan,
                 'jenis_kegiatan' => $request->jenis_kegiatan,
                 'tema_kegiatan' => $request->tema_kegiatan,
-                'tgl_kegiatan' => $request->tgl_kegiatan,
+                'tanggal_kegiatan' => $request->tgl_kegiatan,
                 'total_dana' => $request->total_dana,
-                'file' => $request->file,
+                'lampiran' => $request->file,
             ]);
 
            return redirect('proposal') ;
@@ -102,13 +102,13 @@ class ProposalController extends Controller
     public function update($id, Request $request)
     {
             $request->validate([
-                'id_ormawa' => 'required',
+                'ormawa_id' => 'required',
                 'nama_kegiatan' => 'required',
                 'jenis_kegiatan' => 'required',
                 'tema_kegiatan' => 'required',
-                'tgl_kegiatan' => 'required',
+                'tanggal_kegiatan' => 'required',
                 'total_dana' => 'required',
-                'file' => 'required'
+                'lampiran' => 'required'
             ]);
 
            // $mhs = Proposal::find($id);
@@ -117,13 +117,13 @@ class ProposalController extends Controller
             //
             DB::table('pengajuan_ormawa') -> where('id', $id) 
             -> update([
-            'id_ormawa' => $request->id_ormawa,
+            'ormawa_id' => $request->ormawa_id,
             'nama_kegiatan' => $request->nama_kegiatan,
             'jenis_kegiatan' => $request->jenis_kegiatan,
             'tema_kegiatan' => $request->tema_kegiatan,
-            'tgl_kegiatan' => $request->tgl_kegiatan,
+            'tanggal_kegiatan' => $request->tanggal_kegiatan,
             'total_dana' => $request->total_dana,
-            'file' => $request->file,
+            'lampiran' => $request->lampiran,
             ]);
 
             return redirect ('proposal') ;

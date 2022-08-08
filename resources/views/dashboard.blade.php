@@ -1,3 +1,6 @@
+@section('content')
+@extends('template.app')
+Halaman Dashboard
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +9,7 @@
 </head>
 <body>
   <h1>SIM Kemahasiswaan </h1>
-  <b>BSIM Kemahasiswaan </b>
+  <b>SIM Kemahasiswaan </b>
   <ul>
     <li>SIM Kemahasiswaan </li>
     <li>SIM Kemahasiswaan </li>
@@ -14,3 +17,4 @@
   </ul>
 </body>
 </html>
+@endsection
