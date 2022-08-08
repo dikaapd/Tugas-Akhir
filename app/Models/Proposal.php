@@ -9,15 +9,19 @@ class Proposal extends Model
 {
     use HasFactory;
 
-    protected $table = 'form_pengajuan_proposal';
+    protected $table = 'pengajuan_ormawa';
     protected $primary = 'id';
     protected $fillable = [
-        'nama_ormawa',
-        'tujuan_kegiatan',
-        'tgl_awalkegiatan',
-        'tgl_akhirkegiatan',
-        'anggaran_dana',
+        'id_ormawa',
+        'nama_kegiatan',
+        'jenis_kegiatan',
+        'tema_kegiatan',
+        'tgl_kegiatan',
+        'total_dana',
+        'file',
     ];
 
     protected$hidden = [];
+
+
 }
