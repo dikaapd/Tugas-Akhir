@@ -30,7 +30,7 @@
                 <form action="/beasiswa/{{$item->id}}" method="POST">
                     @csrf
                     @method('delete')
-                    <a href="/beasiswa/{{$item->id}}" class="btn btn-info btn-sm">Detail & Edit</a>
+                    <a href="beasiswa/{{$item->id}}/edit" class="btn btn-info btn-sm">Detail & Edit</a>
                     <input type="submit" class="btn btn-warning btn-sm" value="Delete">
                 </form>
             </td>

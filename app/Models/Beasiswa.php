@@ -18,6 +18,8 @@ class Beasiswa extends Model
         'gaji_ortu',
         'tanggungan',
         'slip_gaji',
+        'status',
+        'tanggal_proses',
     ];
     protected $hidden = [];
 

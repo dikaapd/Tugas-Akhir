@@ -41,15 +41,31 @@ class BeasiswaController extends Controller
     
     }
 
+    private function kuota($jurusan_id)
+    {
+        return Beasiswa::select('jurusan.jurusan as jurusan','jurusan.kuota as kuota','jurusan.id as id', DB::raw('sum(CASE WHEN form_pengajuan_beasiswa.status = "proses" THEN 1 ELSE 0 END) as jumlahpengajuan'))
+        ->leftJoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
+        ->where('jurusan.id', '=', $jurusan_id)
+        ->where('status' , '=' , "daftar")
+        ->groupBy('jurusan.jurusan', 'jurusan.id','jurusan.kuota')
+        ->first();
+    }
+
     public function ajukan($id, Request $request)                                                                                                                    
     {
-        DB::table('form_pengajuan_beasiswa') -> where('id', $id) 
-                -> update([
-                    'status' => 'proses',
-                    'tanggal_proses' => date('Y-m-d H:i:s')
-                ]);
+        $beasiswa       = Beasiswa::find($id);
+        $kuotajurusan   = $this->kuota($beasiswa->jurusan_id); 
+        // dd($kuotajurusan);
+        $kuota              = $kuotajurusan->kuota;
+        $total_pengajuan    = $kuotajurusan->jumlahpengajuan;
+
+        if($kuota >= $total_pengajuan ){
+            $beasiswa->status           = "Proses";
+            $beasiswa->tanggal_proses   = date('Y-m-d H:i:s');
+            $beasiswa->save();
+        }
         return redirect()->back();
-    
+
     }
     public function terima($id, Request $request)                                                                                                                    
     {
