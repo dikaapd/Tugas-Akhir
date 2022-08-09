@@ -19,7 +19,7 @@
           <span class="menu-title">List Yang Diajukan</span>
         </a>
       </li>
-      @endif
+   
       <li class="nav-item">
         <a class="nav-link" href="{{url('/beasiswa/create')}}">
           <i class="icon-columns menu-icon"></i>
@@ -33,6 +33,7 @@
           <span class="menu-title">Pengumuman</span>
         </a>
       </li>
+      @endif
       @if (auth()->user()->level=="ormawa")
       <li class="nav-item">
         <a class="nav-link" href="{{url('/proposal')}}">
