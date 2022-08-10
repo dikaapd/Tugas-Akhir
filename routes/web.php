@@ -32,8 +32,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,bem,ormaw
 
 
 //Beasiswa
-
-
 Route::group(['middleware' => ['auth', 'ceklevel:admin,prodi']], function() { 
   route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
   route::get('/persetujuan',  [App\Http\Controllers\BeasiswaController::class, 'index1']);
@@ -50,7 +48,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,']], func
    route::get('/beasiswa/create', [App\Http\Controllers\BeasiswaController::class, 'create']);
   route::post('/beasiswa/store ' , [App\Http\Controllers\BeasiswaController::class, 'store']);
   route::get('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'show']);
-
+  route::get('/pengumuman',  [App\Http\Controllers\BeasiswaController::class, 'index2']);
 });
 
 //Proposal 

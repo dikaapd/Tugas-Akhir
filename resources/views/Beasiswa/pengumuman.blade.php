@@ -1,8 +1,9 @@
 @extends('template.app')
 @section('content')
-     Halaman Dashboard
+     <h3> Pengumuman Beasiswa</h3>
+     <br>
      
-<table class="table table-striped">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">#</th>
