@@ -13,6 +13,7 @@
           <span class="menu-title">List Yang Diajukan</span>
         </a>
       </li>
+<<<<<<< HEAD
       @else
       @endif
       @if (auth()->user()->level=="prodi")
@@ -25,6 +26,7 @@
       @else
       @endif
       @if (auth()->user()->level=="mahasiswa")
+
       <li class="nav-item">
         <a class="nav-link" href="{{url('/beasiswa/create')}}">
           <i class="icon-columns menu-icon"></i>
@@ -40,7 +42,9 @@
           <span class="menu-title">Pengumuman</span>
         </a>
       </li>
+
       @else
+
       @endif
       @if (auth()->user()->level=="ormawa")
       <li class="nav-item">

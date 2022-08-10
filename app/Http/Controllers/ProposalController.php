@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
+use App\Models\Ormawa;
 use Illuminate\Support\Facades\DB;
-
 use App\Models\Proposal;
 use Exception;
 use Illuminate\Http\Request;
@@ -32,8 +32,9 @@ class ProposalController extends Controller
      */
     public function create()
     {
-        //
-        return view('proposal.create');
+        $ormawa = Ormawa::all();
+        //dd($ormawa);
+        return view('proposal.create' , compact('ormawa'));
     }
 
     /**
@@ -51,17 +52,20 @@ class ProposalController extends Controller
                 'tema_kegiatan' => 'required',
                 'tanggal_kegiatan' => 'required',
                 'total_dana' => 'required',
-                'lampiran' => 'required'
+                'lampiran' => 'required|mimes:pdf,docx|max:5120'
             ]);
+
+            $fileName = date('d-m-Y').'_'.$request->file('file')->getClientOriginalName();  
+            $path = $request->file->move(public_path('upload'), $fileName);
 
             $data = Proposal::create([
                 'ormawa_id' => $request->ormawa_id,
                 'nama_kegiatan' => $request->nama_kegiatan,
                 'jenis_kegiatan' => $request->jenis_kegiatan,
                 'tema_kegiatan' => $request->tema_kegiatan,
-                'tanggal_kegiatan' => $request->tgl_kegiatan,
+                'tanggal_kegiatan' => $request->tanggal_kegiatan,
                 'total_dana' => $request->total_dana,
-                'lampiran' => $request->file,
+                'lampiran' => $request->lampiran,
             ]);
 
            return redirect('proposal') ;
@@ -88,8 +92,9 @@ class ProposalController extends Controller
      */
     public function edit($id)
     {
+        $ormawa = Ormawa::all();
         $data = DB::table('pengajuan_ormawa')->where('id', $id)->first();
-        return view('proposal.edit', compact('data'));
+        return view('proposal.edit', compact('data','ormawa'));
     }
 
     /**
@@ -108,13 +113,22 @@ class ProposalController extends Controller
                 'tema_kegiatan' => 'required',
                 'tanggal_kegiatan' => 'required',
                 'total_dana' => 'required',
-                'lampiran' => 'required'
+                'lampiran' => 'required|mimes:pdf,docx|max:5120'
             ]);
 
            // $mhs = Proposal::find($id);
 
            // $mhs = pengajuan::leftjoin('prodi', 'prodi.id_prodi', '=' , 'pengajuan.id_prodi')->where('status', 1) ->where('id_prodi', auth()->user()->id_prodi) -> get();
             //
+            $ormawa = Ormawa::all();
+            $Proposal = Proposal::where('id', $id)->first();    
+            if ($request->file != Null){
+                  // $request->file->unlink(public_path('upload'), $Proposal->lampiran);
+                   $file_path = public_path().'/data_proposal/'.$Proposal->lampiran;
+                   unlink($file_path);
+                 $fileName = date('d-m-Y').'_'.$request->file('file')->getClientOriginalName();  
+                $path = $request->file->move(public_path('data_proposal'), $fileName);
+                $ormawa = Ormawa::all();
             DB::table('pengajuan_ormawa') -> where('id', $id) 
             -> update([
             'ormawa_id' => $request->ormawa_id,
@@ -126,10 +140,28 @@ class ProposalController extends Controller
             'lampiran' => $request->lampiran,
             ]);
 
-            return redirect ('proposal') ;
+        return redirect ('proposal') ;
+    }
+        $ormawa = Ormawa::all();
+        DB::table('pengajuan_ormawa') -> where('id', $id) 
+        -> update([
+            'ormawa_id' => $request->ormawa_id,
+            'nama_kegiatan' => $request->nama_kegiatan,
+            'jenis_kegiatan' => $request->jenis_kegiatan,
+            'tema_kegiatan' => $request->tema_kegiatan,
+            'tanggal_kegiatan' => $request->tanggal_kegiatan,
+            'total_dana' => $request->total_dana,
+
+        ]);
+        return redirect ('proposal') ;
     }
 
-    /**
+    // $mhs = Beasiswa::find($id);
+
+           // $mhs = pengajuan::leftjoin('prodi', 'prodi.id_prodi', '=' , 'pengajuan.id_prodi')->where('status', 1) ->where('id_prodi', auth()->user()->id_prodi) -> get();
+            //
+    
+    /** 
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -137,16 +169,23 @@ class ProposalController extends Controller
      */
     public function destroy($id)
     {
+      
        
            // $data = Proposal::findOrFail($id);
             //$data = $data->delete();
-            $data = DB::table('pengajuan_ormawa')->where('id', '=' , $id)->delete();
+            $data = DB::table('pengajuan_ormawa')->where('id', '=' , $id);
+            $file_path = public_path().'/data_proposal/'.$data->first()->lampiran;
+            unlink($file_path);
+            $data->delete();
             return redirect ('proposal') ;
-
+           
     }
+
+
 
     //public function search($id)
    // {
         //$data = Proposal::where('id','=', $id)->get();
     //}
 }
+
