@@ -38,7 +38,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{url('/proposal')}}">
           <i class="icon-grid-2 menu-icon"></i>
-          <span class="menu-title">List Pendaftar</span>
+          <span class="menu-title">List Pengajuan</span>
         </a>
       </li>
       <li class="nav-item">
