@@ -1,14 +1,15 @@
 @extends('template.app')
 @section('content')
-     Halaman Dashboard
-     
-<table class="table table-striped">
+     <h3>Halaman List Diajukan Prodi</h3>
+     <br>
+<table class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Nim</th>
       <th scope="col">Nama</th>
       <th scope="col">Jurusan</th>
+      <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -19,7 +20,7 @@
             <td>{{$item->nama_mhs}} </td>
             <td>{{$item->jurusan->jurusan}} </td>
             <td>
-                <a class="btn btn-warning btn-sm" href="{{ route('terima.beasiswa', ['id' => $item->id] ) }}"
+                <a class="btn btn-inverse-success btn-sm" href="{{ route('terima.beasiswa', ['id' => $item->id] ) }}"
                     onclick="event.preventDefault();
                     document.getElementById('terima-form').submit();" >
                     Terima
@@ -27,7 +28,7 @@
                  <form id="terima-form" action="{{ route('terima.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
                    @csrf
                    </form>
-                   <a class="btn btn-warning btn-sm" href="{{ route('tolak.beasiswa', ['id' => $item->id] ) }}"
+                   <a class="btn btn-inverse-danger btn-sm" href="{{ route('tolak.beasiswa', ['id' => $item->id] ) }}"
                     onclick="event.preventDefault();
                     document.getElementById('tolak-form').submit();" >
                     Tolak

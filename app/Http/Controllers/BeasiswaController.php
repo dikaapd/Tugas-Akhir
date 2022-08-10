@@ -63,9 +63,14 @@ class BeasiswaController extends Controller
             $beasiswa->status           = "Proses";
             $beasiswa->tanggal_proses   = date('Y-m-d H:i:s');
             $beasiswa->save();
-        }
+        } 
+        // else {
+            
+        //     with("Gagal", "Kuota Sudah Habis");
+        // }
+      
         return redirect()->back();
-
+    
     }
     public function terima($id, Request $request)                                                                                                                    
     {

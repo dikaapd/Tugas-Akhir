@@ -2,13 +2,14 @@
 @section('content')
      Halaman Dashboard
      
-<table class="table table-striped">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Nim</th>
       <th scope="col">Nama</th>
       <th scope="col">Jurusan</th>
+      <th colspan="2" >Action</th>
     </tr>
   </thead>
   <tbody>
@@ -19,7 +20,7 @@
             <td>{{$item->nama_mhs}} </td>
             <td>{{$item->jurusan->jurusan}} </td>
             <td>
-              <a class="btn btn-warning btn-sm" href="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}"
+              <a class="btn btn-inverse-primary btn-sm" href="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}"
                 onclick="event.preventDefault();
                 document.getElementById('ajukan-form').submit();" >
                 Ajukan
@@ -27,6 +28,8 @@
              <form id="ajukan-form" action="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
                @csrf
                </form>
+              </td>
+              <td>
                 <form action="/beasiswa/{{$item->id}}" method="POST">
                     @csrf
                     @method('delete')
