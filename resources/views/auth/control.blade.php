@@ -27,7 +27,7 @@
       <th scope="col">Nama</th>
       <th scope="col">Level</th>
       <th scope="col">Username</th>
-      <th scope="col">Password</th>
+     
       <th cscope="col" >Action</th>
     </tr>
   </thead>
@@ -38,7 +38,7 @@
             <td>{{$item->nama}} </td>
             <td>{{$item->level}} </td>
             <td>{{$item->username}} </td>
-            <td>{{$item->password}} </td>
+            
               <td>
                     <a href="usercontrol/{{$item->id}}" class="btn btn-outline-info btn-sm">Reset Password</a>
                 </form>

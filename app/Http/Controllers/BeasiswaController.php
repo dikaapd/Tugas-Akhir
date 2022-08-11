@@ -40,15 +40,15 @@ class BeasiswaController extends Controller
     
     }
 
-    private function kuota($jurusan_id)
-    {
-        return Beasiswa::select('jurusan.jurusan as jurusan','jurusan.kuota as kuota','jurusan.id as id', DB::raw('sum(CASE WHEN form_pengajuan_beasiswa.status = "proses" THEN 1 ELSE 0 END) as jumlahpengajuan'))
-        ->leftJoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
-        ->where('jurusan.id', '=', $jurusan_id)
-        ->where('status' , '=' , "daftar")
-        ->groupBy('jurusan.jurusan', 'jurusan.id','jurusan.kuota')
-        ->first();
-    }
+    // private function kuota($jurusan_id)
+    // {
+    //     return Beasiswa::select('jurusan.jurusan as jurusan','jurusan.kuota as kuota','jurusan.id as id', DB::raw('sum(CASE WHEN form_pengajuan_beasiswa.status = "proses" THEN 1 ELSE 0 END) as jumlahpengajuan'))
+    //     ->leftJoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
+    //     ->where('jurusan.id', '=', $jurusan_id)
+    //     ->where('status' , '=' , "daftar")
+    //     ->groupBy('jurusan.jurusan', 'jurusan.id','jurusan.kuota')
+    //     ->first();
+    // }
 
     // private function kuota($jurusan_id)
     // {
@@ -59,29 +59,35 @@ class BeasiswaController extends Controller
     //     ->groupBy('jurusan.jurusan', 'jurusan.id','jurusan.kuota')
     //     ->first()->kuota_tersisa;
     // }
-    // private function kuota($jurusan_id)
-    // {
-    //     return DB::select("SELECT (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id)) AS kuota_tersisa FROM form_pengajuan_beasiswa INNER JOIN jurusan ON form_pengajuan_beasiswa.jurusan_id = jurusan.id WHERE form_pengajuan_beasiswa.status = 'proses' AND form_pengajuan_beasiswa.jurusan_id = $jurusan_id");
-    // }
+    private function kuota($jurusan_id)
+    {
+        return DB::select("SELECT
+        CASE
+            WHEN (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id)) IS NULL THEN jurusan.id
+            ELSE (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id))
+        END AS kuota_tersisa
+    FROM form_pengajuan_beasiswa INNER JOIN jurusan ON form_pengajuan_beasiswa.jurusan_id = jurusan.id
+    WHERE form_pengajuan_beasiswa.status = 'proses' AND jurusan.id =   $jurusan_id")[0];
+    }
 
     public function ajukan($id, Request $request)                                                                                                                    
-    {
+    {dd($id);
         $beasiswa       = Beasiswa::find($id);
         $kuotajurusan   = $this->kuota($beasiswa->jurusan_id); 
-        dd($kuotajurusan);
-        $kuota              = $kuotajurusan->kuota;
-        $total_pengajuan    = $kuotajurusan->jumlahpengajuan;
+        
+        $kuota              = $kuotajurusan->kuota_tersisa;
+       
 
-        if($kuota >= $total_pengajuan ){
+        if($kuota > 0 ){
             $beasiswa->status           = "Proses";
             $beasiswa->tanggal_proses   = date('Y-m-d H:i:s');
             $beasiswa->save();
         } 
-        else {
+        // else {
             
-            return redirect()->back()->with("Gagal", "Kuota Sudah Habis");
-        }
-    
+        //     with("Gagal", "Kuota Sudah Habis");
+        // }
+        return redirect()->back();
     }
     public function terima($id, Request $request)                                                                                                                    
     {
