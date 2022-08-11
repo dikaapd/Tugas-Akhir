@@ -17,12 +17,11 @@ class BeasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
         $data = Beasiswa::where('status' , '=' , "daftar")->get();
         return view('Beasiswa.dashboard', compact('data'));
-        
-    
     }
 
     public function index1()
@@ -51,11 +50,25 @@ class BeasiswaController extends Controller
         ->first();
     }
 
+    // private function kuota($jurusan_id)
+    // {
+    //     return DB::raw("SELECT (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id)) AS kuota_tersisa FROM form_pengajuan_beasiswa INNER JOIN jurusan ON form_pengajuan_beasiswa.jurusan_id = jurusan.id WHERE form_pengajuan_beasiswa.status = 'proses' AND form_pengajuan_beasiswa.jurusan_id = 3")
+    //     ->leftJoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
+    //     ->where('jurusan.id', '=', $jurusan_id)
+    //     ->where('status' , '=' , "daftar")
+    //     ->groupBy('jurusan.jurusan', 'jurusan.id','jurusan.kuota')
+    //     ->first()->kuota_tersisa;
+    // }
+    // private function kuota($jurusan_id)
+    // {
+    //     return DB::select("SELECT (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id)) AS kuota_tersisa FROM form_pengajuan_beasiswa INNER JOIN jurusan ON form_pengajuan_beasiswa.jurusan_id = jurusan.id WHERE form_pengajuan_beasiswa.status = 'proses' AND form_pengajuan_beasiswa.jurusan_id = $jurusan_id");
+    // }
+
     public function ajukan($id, Request $request)                                                                                                                    
     {
         $beasiswa       = Beasiswa::find($id);
         $kuotajurusan   = $this->kuota($beasiswa->jurusan_id); 
-        // dd($kuotajurusan);
+        dd($kuotajurusan);
         $kuota              = $kuotajurusan->kuota;
         $total_pengajuan    = $kuotajurusan->jumlahpengajuan;
 
@@ -64,12 +77,10 @@ class BeasiswaController extends Controller
             $beasiswa->tanggal_proses   = date('Y-m-d H:i:s');
             $beasiswa->save();
         } 
-        // else {
+        else {
             
-        //     with("Gagal", "Kuota Sudah Habis");
-        // }
-      
-        return redirect()->back();
+            return redirect()->back()->with("Gagal", "Kuota Sudah Habis");
+        }
     
     }
     public function terima($id, Request $request)                                                                                                                    

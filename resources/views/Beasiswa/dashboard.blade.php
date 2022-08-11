@@ -1,15 +1,33 @@
 @extends('template.app')
 @section('content')
-     Halaman Dashboard
-     
+    <h3> Halaman List Pendaftar </h3>
+     <br/>
+{{-- 
+  <form action="{{URL('beasiswa')}}" method="GET">
+  <ul class="navbar-nav mr-sm-2">
+    <li>Jurusan
+      <div class="input-group">
+      <select class="form-control-sm" name="cari" id="cari">
+       <option disable value> Prodi </option>
+      @foreach ($jurusan as $item)
+      <option value="{{$item->id}}">{{$item->jurusan}}</option>
+      @endforeach
+      </select>
+      <button type="submit" class="btn btn-primary mr-2">Cari</button>
+      </div>
+    </li>
+  </ul>
+  <br/> --}}
+  
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">No</th>
       <th scope="col">Nim</th>
       <th scope="col">Nama</th>
       <th scope="col">Jurusan</th>
-      <th colspan="2" >Action</th>
+      <th cscope="col" >Status</th>
+      <th cscope="col" >Action</th>
     </tr>
   </thead>
   <tbody>

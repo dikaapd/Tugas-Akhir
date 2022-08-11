@@ -34,6 +34,11 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,bem,ormaw
 //Beasiswa
 Route::group(['middleware' => ['auth', 'ceklevel:admin,prodi']], function() { 
   route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
+  route::get('/usercontrol/registrasi', [App\Http\Controllers\LoginController::class, 'registrasimodal'])->name('registrasimodal');
+  route::post('/usercontrol/postregistrasi', [App\Http\Controllers\LoginController::class, 'postregistrasimodal'])->name('postregistrasimodal');
+  route::get('/usercontrol',  [App\Http\Controllers\LoginController::class, 'index1']);
+  route::get('/usercontrol/cari',  [App\Http\Controllers\LoginController::class, 'cari']);
+  route::get('/usercontrol/{id}',  [App\Http\Controllers\LoginController::class, 'reset'])->name('reset.pw');
   route::get('/persetujuan',  [App\Http\Controllers\BeasiswaController::class, 'index1']);
   route::get('/pengumuman',  [App\Http\Controllers\BeasiswaController::class, 'index2']);
   route::post('/ajukan/{id}',  [App\Http\Controllers\BeasiswaController::class, 'ajukan'])->name('ajukan.beasiswa');
