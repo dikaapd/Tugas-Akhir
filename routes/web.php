@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +33,17 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,bem,ormaw
 //Beasiswa
 Route::group(['middleware' => ['auth', 'ceklevel:admin,prodi']], function() { 
   route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
+  route::get('/kuota',  [App\Http\Controllers\JurusanController::class, 'index']);
+  route::get('/kuota/{id}/edit', [App\Http\Controllers\JurusanController::class, 'edit']);
+  route::put('/kuota/{id}', [App\Http\Controllers\JurusanController::class, 'update'])->name('update_kuota');
+  route::get('/usercontrol/registrasi', [App\Http\Controllers\LoginController::class, 'registrasimodal'])->name('registrasimodal');
+  route::post('/usercontrol/postregistrasi', [App\Http\Controllers\LoginController::class, 'postregistrasimodal'])->name('postregistrasimodal');
+  route::get('/usercontrol',  [App\Http\Controllers\LoginController::class, 'index1']);
+  route::get('/usercontrol/cari',  [App\Http\Controllers\LoginController::class, 'cari']);
+  route::get('/usercontrol/{id}',  [App\Http\Controllers\LoginController::class, 'reset'])->name('reset.pw');
   route::get('/persetujuan',  [App\Http\Controllers\BeasiswaController::class, 'index1']);
   route::get('/pengumuman',  [App\Http\Controllers\BeasiswaController::class, 'index2']);
-  route::post('/ajukan/{id}',  [App\Http\Controllers\BeasiswaController::class, 'ajukan'])->name('ajukan.beasiswa');
+  route::get('/ajukan/{id}',  [App\Http\Controllers\BeasiswaController::class, 'ajukan'])->name('ajukan.beasiswa');
   route::post('/terima/{id}',  [App\Http\Controllers\BeasiswaController::class, 'terima'])->name('terima.beasiswa');
   route::post('/tolak/{id}',  [App\Http\Controllers\BeasiswaController::class, 'tolak'])->name('tolak.beasiswa');
   route::get('/beasiswa/{id}/edit', [App\Http\Controllers\BeasiswaController::class, 'edit']);
@@ -78,3 +85,6 @@ route::post('/proposal/store', [App\Http\Controllers\ProposalController::class, 
 route::get('/proposal/{id}/edit', [App\Http\Controllers\ProposalController::class, 'edit']);
 route::put('/proposal/{id}', [App\Http\Controllers\ProposalController::class, 'update'])->name('ubah_data');
 route::delete('/proposal/{id}', [App\Http\Controllers\ProposalController::class,'destroy']);
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

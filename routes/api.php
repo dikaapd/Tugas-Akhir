@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApiBeasiswaController;
+use App\Http\Controllers\API\JurusanController;
 use App\Http\Controllers\API\UserBeasiswaController;
 use App\Http\Controllers\BeasiswaController;
 /*
@@ -17,16 +18,16 @@ use App\Http\Controllers\BeasiswaController;
 */
 
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-  //  return $request->user();
+//  return $request->user();
 //});
 
 Route::get('beasiswa', [ApiBeasiswaController::class, 'index']);
 
-Route::POST('beasiswa', [ApiBeasiswaController::class, 'store'])->name('tambah_data');
+Route::POST('beasiswa', [ApiBeasiswaController::class, 'store']);
 Route::get('beasiswa/show/{id}', [ApiBeasiswaController::class, 'show']);
 Route::post('beasiswa/update/{id}', [ApiBeasiswaController::class, 'update']);
 Route::get('beasiswa/destroy/{id}', [ApiBeasiswaController::class, 'destroy']);
-
+Route::get('jurusan', [JurusanController::class, 'list']);
 //Register & Login Untuk di android
 Route::post('beasiswauser/register', [UserBeasiswaController::class, 'register']);
 Route::post('beasiswauser/login', [UserBeasiswaController::class, 'login']);

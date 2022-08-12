@@ -9,6 +9,8 @@ use App\Models\Jurusan;
 use App\Models\Beasiswa;
 use Exception;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class BeasiswaController extends Controller
 {
@@ -17,17 +19,16 @@ class BeasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Beasiswa::where('status' , '=' , "daftar")->get();
-        return view('Beasiswa.dashboard', compact('data'));
         
-    
+        $data = Beasiswa::where('status' , '=' , "daftar")->paginate(7);
+        return view('Beasiswa.dashboard', compact('data'));
     }
 
     public function index1()
     {
-        $data = Beasiswa::where('status' , '=' , "proses")->get();
+        $data = Beasiswa::where('status' , '=' , "proses")->paginate(7);
         return view('Beasiswa.listdiajukan', compact('data'));
         
     
@@ -35,42 +36,63 @@ class BeasiswaController extends Controller
 
     public function index2()
     {
-        $data = Beasiswa::where('status' , '=' , "diterima")->orWhere('status' , '=' , "ditolak")->get();
+        $data = Beasiswa::where('status' , '=' , "diterima")->orWhere('status' , '=' , "ditolak")->paginate(7);
         return view('Beasiswa.pengumuman', compact('data'));
         
     
     }
 
+    // private function kuota($jurusan_id)
+    // {
+    //     return Beasiswa::select('jurusan.jurusan as jurusan','jurusan.kuota as kuota','jurusan.id as id', DB::raw('sum(CASE WHEN form_pengajuan_beasiswa.status = "proses" THEN 1 ELSE 0 END) as jumlahpengajuan'))
+    //     ->leftJoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
+    //     ->where('jurusan.id', '=', $jurusan_id)
+    //     ->where('status' , '=' , "daftar")
+    //     ->groupBy('jurusan.jurusan', 'jurusan.id','jurusan.kuota')
+    //     ->first();
+    // }
+
+    // private function kuota($jurusan_id)
+    // {
+    //     return DB::raw("SELECT (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id)) AS kuota_tersisa FROM form_pengajuan_beasiswa INNER JOIN jurusan ON form_pengajuan_beasiswa.jurusan_id = jurusan.id WHERE form_pengajuan_beasiswa.status = 'proses' AND form_pengajuan_beasiswa.jurusan_id = 3")
+    //     ->leftJoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
+    //     ->where('jurusan.id', '=', $jurusan_id)
+    //     ->where('status' , '=' , "daftar")
+    //     ->groupBy('jurusan.jurusan', 'jurusan.id','jurusan.kuota')
+    //     ->first()->kuota_tersisa;
+    // }
     private function kuota($jurusan_id)
     {
-        return Beasiswa::select('jurusan.jurusan as jurusan','jurusan.kuota as kuota','jurusan.id as id', DB::raw('sum(CASE WHEN form_pengajuan_beasiswa.status = "proses" THEN 1 ELSE 0 END) as jumlahpengajuan'))
-        ->leftJoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
-        ->where('jurusan.id', '=', $jurusan_id)
-        ->where('status' , '=' , "daftar")
-        ->groupBy('jurusan.jurusan', 'jurusan.id','jurusan.kuota')
-        ->first();
+        return DB::select("SELECT
+        CASE
+            WHEN (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id)) IS NULL THEN jurusan.id
+            ELSE (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id))
+        END AS kuota_tersisa
+    FROM form_pengajuan_beasiswa INNER JOIN jurusan ON form_pengajuan_beasiswa.jurusan_id = jurusan.id
+    WHERE form_pengajuan_beasiswa.status = 'proses' AND jurusan.id =   $jurusan_id")[0];
     }
 
     public function ajukan($id, Request $request)                                                                                                                    
-    {
+    { 
+        // dd($id);
         $beasiswa       = Beasiswa::find($id);
         $kuotajurusan   = $this->kuota($beasiswa->jurusan_id); 
-        // dd($kuotajurusan);
-        $kuota              = $kuotajurusan->kuota;
-        $total_pengajuan    = $kuotajurusan->jumlahpengajuan;
+        $kuota              = $kuotajurusan->kuota_tersisa;
+        
 
-        if($kuota >= $total_pengajuan ){
+        if($kuota > 0 ){
             $beasiswa->status           = "Proses";
             $beasiswa->tanggal_proses   = date('Y-m-d H:i:s');
             $beasiswa->save();
+            Alert::success('Pengajuan Berhasil', 'Info Message');
         } 
-        // else {
+        else {
             
-        //     with("Gagal", "Kuota Sudah Habis");
-        // }
-      
+            Alert::warning('Pengajuan Ditolak', 'Kuota Sudah Habis');
+        }
+        
         return redirect()->back();
-    
+        
     }
     public function terima($id, Request $request)                                                                                                                    
     {
@@ -102,6 +124,7 @@ class BeasiswaController extends Controller
     {
         //
         $jurusan = Jurusan::all();
+        // Alert::success('Congrats', 'You\'ve Successfully Registered');  
         return view('beasiswa.create' , compact('jurusan'));
     }
 
@@ -135,8 +158,9 @@ class BeasiswaController extends Controller
                 'tanggungan' => $request->tanggungan,
                 'slip_gaji' => $fileName,
             ]);
+            Alert::success('Selamat', 'Pengajuan Behasil Dilakukan');
 
-           return redirect('beasiswa') -> with("Success", "Data Berhasil Di Input") ;
+            return redirect('/');
     }
 
     /**
@@ -213,6 +237,8 @@ class BeasiswaController extends Controller
                     'tanggungan' => $request->tanggungan,
                     
                 ]);
+                Alert::success('Selamat', 'Data Berhasil Diubah');
+
             return redirect ('beasiswa') ;
     }
                 
@@ -239,14 +265,12 @@ class BeasiswaController extends Controller
             $file_path = public_path().'/upload/'.$data->first()->slip_gaji;
             unlink($file_path);
             $data->delete();
+             Alert::success( 'Data Berhasil Dihapus');
             return redirect ('beasiswa') ;
            
     }
 
-    public function download(Request $request,$file)
-    {
-        return response()->download(public_path('upload'.$file));
-    }
+    
 
     //public function search($nim)
    // {s

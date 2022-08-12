@@ -1,15 +1,34 @@
 @extends('template.app')
 @section('content')
-     Halaman Dashboard
-     
+
+    <h3> Halaman List Pendaftar </h3>
+     <br/>
+{{-- 
+  <form action="{{URL('beasiswa')}}" method="GET">
+  <ul class="navbar-nav mr-sm-2">
+    <li>Jurusan
+      <div class="input-group">
+      <select class="form-control-sm" name="cari" id="cari">
+       <option disable value> Prodi </option>
+      @foreach ($jurusan as $item)
+      <option value="{{$item->id}}">{{$item->jurusan}}</option>
+      @endforeach
+      </select>
+      <button type="submit" class="btn btn-primary mr-2">Cari</button>
+      </div>
+    </li>
+  </ul>
+  <br/> --}}
+  
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">No</th>
       <th scope="col">Nim</th>
       <th scope="col">Nama</th>
       <th scope="col">Jurusan</th>
-      <th colspan="2" >Action</th>
+      <th cscope="col" >Status</th>
+      <th cscope="col" >Action</th>
     </tr>
   </thead>
   <tbody>
@@ -21,13 +40,13 @@
             <td>{{$item->jurusan->jurusan}} </td>
             <td>
               <a class="btn btn-inverse-primary btn-sm" href="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}"
-                onclick="event.preventDefault();
-                document.getElementById('ajukan-form').submit();" >
-                Ajukan
+                {{-- onclick="event.preventDefault();
+                document.getElementById('ajukan-form-{{'id'}}').submit();" > --}}
+               > Ajukan
              </a>
-             <form id="ajukan-form" action="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
+             {{-- <form id='ajukan-form-{{'id'}}' action="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
                @csrf
-               </form>
+               </form> --}}
               </td>
               <td>
                 <form action="/beasiswa/{{$item->id}}" method="POST">
@@ -43,5 +62,11 @@
   </tbody>
 </table>
 <br>
-
+<div>
+  {{-- Halaman : {{ $data->currentPage() }} <br/>
+	Jumlah Data : {{ $data->total() }} <br/>
+	Data Per Halaman : {{ $data->perPage() }} <br/> --}}
+  {{$data->links() }}
+ 
+</div>
 @endsection

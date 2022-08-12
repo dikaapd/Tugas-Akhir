@@ -19,19 +19,16 @@ class ApiBeasiswaController extends Controller
     public function index()
     {
         try {
-        $data = Beasiswa::all();
+            $data = Beasiswa::all();
 
-        if($data){
-            return ApiFormatter::createApi(200, 'Succes', $data);
-        } else {
+            if ($data) {
+                return ApiFormatter::createApi(200, 'Succes', $data);
+            } else {
+                return ApiFormatter::createApi(400, 'Failed');
+            }
+        } catch (Exception $error) {
             return ApiFormatter::createApi(400, 'Failed');
-
         }
-    } catch(Exception $error) {
-        return ApiFormatter::createApi(400, 'Failed');
-    }
-       
-    
     }
 
     /**
@@ -42,7 +39,7 @@ class ApiBeasiswaController extends Controller
     public function create()
     {
         //
-     
+
     }
 
     /**
@@ -53,36 +50,20 @@ class ApiBeasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'nim' => 'required',
-                'nama_mhs' => 'required',
-                'jurusan' => 'required',
-                'gaji_ortu' => 'required',
-                'tanggungan' => 'required',
-                'slip_gaji' => 'required'
-            ]);
+        $fileName = time() . $request->file('slip_gaji')->getClientOriginalName();
+        $path = $request->file('slip_gaji')->move('data-slip-gaji', $fileName);
+        $validasi['slip_gaji'] = $path;
 
-            $form_pengajuan_beasiswa = Beasiswa::create([
-                'nim' => $request->nim,
-                'nama_mhs' => $request->nama_mhs,
-                'jurusan' => $request->jurusan,
-                'gaji_ortu' => $request->gaji_ortu,
-                'tanggungan' => $request->tanggungan,
-                'slip_gaji' => $request->slip_gaji,
-            ]);
+        $beasiswa = new Beasiswa();
+        $beasiswa->nim = $request->nim;
+        $beasiswa->nama_mhs = $request->nama_mhs;
+        $beasiswa->jurusan_id = $request->jurusan_id;
+        $beasiswa->gaji_ortu = $request->gaji_ortu;
+        $beasiswa->tanggungan = $request->tanggungan;
+        $beasiswa->slip_gaji = $path;
+        $beasiswa->save();
 
-            $data = Beasiswa::where('id','=', $form_pengajuan_beasiswa->id)->get();
-
-            if($data){
-                return ApiFormatter::createApi(200, 'Succes', $data);
-            } else {
-                return ApiFormatter::createApi(400, 'Failed');
-
-            }
-        } catch(Exception $error) {
-            return ApiFormatter::createApi(400, 'Failed');
-        }
+        return ApiFormatter::createApi(200, 'Data Berhasil Dimasukan');
     }
 
     /**
@@ -93,14 +74,13 @@ class ApiBeasiswaController extends Controller
      */
     public function show($id)
     {
-        $data = Beasiswa::where('id','=', $id)->get();
+        $data = Beasiswa::where('id', '=', $id)->get();
 
-            if($data){
-                return ApiFormatter::createApi(200, 'Succes', $data);
-            } else {
-                return ApiFormatter::createApi(400, 'Failed');
-
-            }
+        if ($data) {
+            return ApiFormatter::createApi(200, 'Succes', $data);
+        } else {
+            return ApiFormatter::createApi(400, 'Failed');
+        }
     }
 
     /**
@@ -135,7 +115,7 @@ class ApiBeasiswaController extends Controller
 
             $form_pengajuan_beasiswa = Beasiswa::findOrFail($id);
 
-            $form_pengajuan_beasiswa -> update([
+            $form_pengajuan_beasiswa->update([
                 'nim' => $request->nim,
                 'nama_mhs' => $request->nama_mhs,
                 'jurusan' => $request->jurusan,
@@ -144,15 +124,14 @@ class ApiBeasiswaController extends Controller
                 'slip_gaji' => $request->slip_gaji,
             ]);
 
-            $data = Beasiswa::where('id','=', $form_pengajuan_beasiswa->id)->get();
+            $data = Beasiswa::where('id', '=', $form_pengajuan_beasiswa->id)->get();
 
-            if($data){
+            if ($data) {
                 return ApiFormatter::createApi(200, 'Succes', $data);
             } else {
                 return ApiFormatter::createApi(400, 'Failed');
-
             }
-        } catch(Exception $error) {
+        } catch (Exception $error) {
             return ApiFormatter::createApi(400, 'Gagal');
         }
     }
@@ -169,7 +148,7 @@ class ApiBeasiswaController extends Controller
             $data = Beasiswa::findOrFail($id);
             $data = $data->delete();
 
-            if($data){
+            if ($data) {
                 return ApiFormatter::createApi(200, 'Succes Destroy Data');
             } else {
                 return ApiFormatter::createApi(400, 'Failed');
@@ -181,13 +160,12 @@ class ApiBeasiswaController extends Controller
 
     public function search($nim)
     {
-        $data = Beasiswa::where('nim','=', $nim)->get();
+        $data = Beasiswa::where('nim', '=', $nim)->get();
 
-            if($data){
-                return ApiFormatter::createApi(200, 'Succes', $data = Beasiswa::all());
-            } else {
-                return ApiFormatter::createApi(400, 'Failed');
-
-            }
+        if ($data) {
+            return ApiFormatter::createApi(200, 'Succes', $data = Beasiswa::all());
+        } else {
+            return ApiFormatter::createApi(400, 'Failed');
+        }
     }
 }
