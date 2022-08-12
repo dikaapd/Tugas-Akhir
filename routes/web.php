@@ -85,6 +85,6 @@ route::post('/proposal/store', [App\Http\Controllers\ProposalController::class, 
 route::get('/proposal/{id}/edit', [App\Http\Controllers\ProposalController::class, 'edit']);
 route::put('/proposal/{id}', [App\Http\Controllers\ProposalController::class, 'update'])->name('ubah_data');
 route::delete('/proposal/{id}', [App\Http\Controllers\ProposalController::class,'destroy']);
-
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
