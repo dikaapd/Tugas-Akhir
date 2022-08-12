@@ -9,6 +9,8 @@ use App\Models\Jurusan;
 use App\Models\Beasiswa;
 use Exception;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class BeasiswaController extends Controller
 {
@@ -20,13 +22,13 @@ class BeasiswaController extends Controller
     public function index(Request $request)
     {
         
-        $data = Beasiswa::where('status' , '=' , "daftar")->get();
+        $data = Beasiswa::where('status' , '=' , "daftar")->paginate(7);
         return view('Beasiswa.dashboard', compact('data'));
     }
 
     public function index1()
     {
-        $data = Beasiswa::where('status' , '=' , "proses")->get();
+        $data = Beasiswa::where('status' , '=' , "proses")->paginate(7);
         return view('Beasiswa.listdiajukan', compact('data'));
         
     
@@ -34,7 +36,7 @@ class BeasiswaController extends Controller
 
     public function index2()
     {
-        $data = Beasiswa::where('status' , '=' , "diterima")->orWhere('status' , '=' , "ditolak")->get();
+        $data = Beasiswa::where('status' , '=' , "diterima")->orWhere('status' , '=' , "ditolak")->paginate(7);
         return view('Beasiswa.pengumuman', compact('data'));
         
     
@@ -71,23 +73,26 @@ class BeasiswaController extends Controller
     }
 
     public function ajukan($id, Request $request)                                                                                                                    
-    {dd($id);
+    { 
+        // dd($id);
         $beasiswa       = Beasiswa::find($id);
         $kuotajurusan   = $this->kuota($beasiswa->jurusan_id); 
-        
         $kuota              = $kuotajurusan->kuota_tersisa;
-       
+        
 
         if($kuota > 0 ){
             $beasiswa->status           = "Proses";
             $beasiswa->tanggal_proses   = date('Y-m-d H:i:s');
             $beasiswa->save();
+            Alert::success('Pengajuan Berhasil', 'Info Message');
         } 
-        // else {
+        else {
             
-        //     with("Gagal", "Kuota Sudah Habis");
-        // }
+            Alert::warning('Pengajuan Ditolak', 'Kuota Sudah Habis');
+        }
+        
         return redirect()->back();
+        
     }
     public function terima($id, Request $request)                                                                                                                    
     {
@@ -119,6 +124,7 @@ class BeasiswaController extends Controller
     {
         //
         $jurusan = Jurusan::all();
+        // Alert::success('Congrats', 'You\'ve Successfully Registered');  
         return view('beasiswa.create' , compact('jurusan'));
     }
 
@@ -152,8 +158,9 @@ class BeasiswaController extends Controller
                 'tanggungan' => $request->tanggungan,
                 'slip_gaji' => $fileName,
             ]);
+            Alert::success('Selamat', 'Pengajuan Behasil Dilakukan');
 
-           return redirect('beasiswa') -> with("Success", "Data Berhasil Di Input") ;
+            return redirect('/');
     }
 
     /**
@@ -230,6 +237,8 @@ class BeasiswaController extends Controller
                     'tanggungan' => $request->tanggungan,
                     
                 ]);
+                Alert::success('Selamat', 'Data Berhasil Diubah');
+
             return redirect ('beasiswa') ;
     }
                 
@@ -256,14 +265,12 @@ class BeasiswaController extends Controller
             $file_path = public_path().'/upload/'.$data->first()->slip_gaji;
             unlink($file_path);
             $data->delete();
+             Alert::success( 'Data Berhasil Dihapus');
             return redirect ('beasiswa') ;
            
     }
 
-    public function download(Request $request,$file)
-    {
-        return response()->download(public_path('upload'.$file));
-    }
+    
 
     //public function search($nim)
    // {s

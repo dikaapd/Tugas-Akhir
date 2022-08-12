@@ -34,6 +34,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,bem,ormaw
 //Beasiswa
 Route::group(['middleware' => ['auth', 'ceklevel:admin,prodi']], function() { 
   route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
+  route::get('/kuota',  [App\Http\Controllers\JurusanController::class, 'index']);
+  route::get('/kuota/{id}/edit', [App\Http\Controllers\JurusanController::class, 'edit']);
+  route::put('/kuota/{id}', [App\Http\Controllers\JurusanController::class, 'update'])->name('update_kuota');
   route::get('/usercontrol/registrasi', [App\Http\Controllers\LoginController::class, 'registrasimodal'])->name('registrasimodal');
   route::post('/usercontrol/postregistrasi', [App\Http\Controllers\LoginController::class, 'postregistrasimodal'])->name('postregistrasimodal');
   route::get('/usercontrol',  [App\Http\Controllers\LoginController::class, 'index1']);
@@ -83,3 +86,6 @@ route::post('/proposal/store', [App\Http\Controllers\ProposalController::class, 
 route::get('/proposal/{id}/edit', [App\Http\Controllers\ProposalController::class, 'edit']);
 route::put('/proposal/{id}', [App\Http\Controllers\ProposalController::class, 'update'])->name('ubah_data');
 route::delete('/proposal/{id}', [App\Http\Controllers\ProposalController::class,'destroy']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

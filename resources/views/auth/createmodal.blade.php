@@ -1,5 +1,5 @@
-<form action="{{route('postregistrasimodal')}}" method="post" enctype="multipart/form-data">
-    {{ csrf_field() }}
+
+
     <div class="modal fade text-left" id="ModalCreate" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -10,6 +10,8 @@
                     </button>                    
                 </div>
                 <div class="modal-body">
+                  <form action="{{route('postregistrasimodal')}}" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
                     <form class="pt-3">
                         <div class="form-group">
                           <input type="text" class="form-control form-control-lg" name = "nama" placeholder="Nama Prodi">
@@ -30,5 +32,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </form>

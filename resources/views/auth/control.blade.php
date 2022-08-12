@@ -12,11 +12,11 @@
       </form>
       </form>
     </div>
-    {{-- <div class="col-md-6 mb-4">
+    <div class="col-md-6 mb-4">
     </div>
     <div class="col-md-6 mb-4">
-      <a href="" class="btn btn-success mr-2" data-toggle="modal" data-target="#ModalCreate">Tambah User Prodi</a>
-    </div> --}}
+      <a href="#" class="btn btn-success mr-2" data-toggle="modal" data-target="#ModalCreate">Tambah User Prodi</a>
+    </div>
       </div>
      <br/>
   
@@ -47,7 +47,14 @@
     @empty
     @endforelse
   </tbody>
+  
 </table>
 <br>
+<div>
+  {{$data->links() }}
+  </div>
+
+@include('sweetalert::alert')
 @include('auth.createmodal')
+
 @endsection

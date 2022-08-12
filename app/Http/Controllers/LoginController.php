@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use Alert;
+// use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -58,6 +60,7 @@ public function postregistrasimodal(Request $request){
        'level' => $request->level,
        'remember_token' => Str::random(60),
    ]);
+   Alert::success('Congrats', 'You\'ve Successfully Registered');
 
    return redirect ('usercontrol');
 }
@@ -66,7 +69,7 @@ public function postregistrasimodal(Request $request){
        $data = User::where('level' , '=' , "admin")
        ->orWhere ('level' , '=' , "prodi")
        ->orWhere ('level' , '=' , "mahasiswa")
-       ->get();
+       ->paginate(5);
        return view('auth.control', compact('data'));
    }
 

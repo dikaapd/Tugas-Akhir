@@ -20,6 +20,7 @@
       <div class="col-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
+           
             <form action="{{URL('beasiswa/store')}}" method="POST" enctype="multipart/form-data">
               @csrf
             <h4 class="card-title">From Pengajuan Beasiswa</h4>
@@ -47,7 +48,7 @@
               </div>
               
               <div class="form-group">
-                <label>File upload</label>
+                <label>Struk Gaji</label>
                 <div class="input-group col-xs-12">
                   <input type="file" name="file" id="file" class="form-control file-upload-info"  placeholder="Upload Image">
                   <span class="input-group-append">

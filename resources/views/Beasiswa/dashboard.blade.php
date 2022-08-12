@@ -1,5 +1,6 @@
 @extends('template.app')
 @section('content')
+
     <h3> Halaman List Pendaftar </h3>
      <br/>
 {{-- 
@@ -39,13 +40,13 @@
             <td>{{$item->jurusan->jurusan}} </td>
             <td>
               <a class="btn btn-inverse-primary btn-sm" href="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}"
-                onclick="event.preventDefault();
-                document.getElementById('ajukan-form').submit();" >
-                Ajukan
+                {{-- onclick="event.preventDefault();
+                document.getElementById('ajukan-form-{{'id'}}').submit();" > --}}
+               > Ajukan
              </a>
-             <form id="ajukan-form" action="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
+             {{-- <form id='ajukan-form-{{'id'}}' action="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
                @csrf
-               </form>
+               </form> --}}
               </td>
               <td>
                 <form action="/beasiswa/{{$item->id}}" method="POST">
@@ -61,5 +62,11 @@
   </tbody>
 </table>
 <br>
-
+<div>
+  {{-- Halaman : {{ $data->currentPage() }} <br/>
+	Jumlah Data : {{ $data->total() }} <br/>
+	Data Per Halaman : {{ $data->perPage() }} <br/> --}}
+  {{$data->links() }}
+ 
+</div>
 @endsection
