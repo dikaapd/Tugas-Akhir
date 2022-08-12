@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="{{asset('layout/vendors/feather/feather.css')}}">
   <link rel="stylesheet" href="{{asset('layout/vendors/ti-icons/css/themify-icons.css')}}">
   <link rel="stylesheet" href="{{asset('layout/vendors/css/vendor.bundle.base.css')}}">
-    <link rel="stylesheet" href="{{asset('layout/vendors/mdi/css/materialdesignicons.min.css')}}">
+  <link rel="stylesheet" href="{{asset('layout/vendors/mdi/css/materialdesignicons.min.css')}}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <link rel="stylesheet" href="{{asset('layout/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
@@ -151,6 +152,7 @@
       @include('template.sidebar')
       <!-- partial -->
       
+      @include('sweetalert::alert')
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">

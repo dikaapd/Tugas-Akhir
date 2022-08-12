@@ -12,8 +12,18 @@
           <i class="mdi mdi-account menu-icon"></i>
           <span class="menu-title">List Yang Diajukan</span>
         </a>
+      </li> <li class="nav-item">
+        <a class="nav-link" href="{{url('/usercontrol')}}">
+          <i class="mdi mdi-account menu-icon"></i>
+          <span class="menu-title">User Control</span>
+        </a>
       </li>
-<<<<<<< HEAD
+    </li> <li class="nav-item">
+      <a class="nav-link" href="{{url('/kuota')}}">
+        <i class="icon-paper menu-icon"></i>
+        <span class="menu-title">Setting Kuota</span>
+      </a>
+    </li>
       @else
       @endif
       @if (auth()->user()->level=="prodi")
