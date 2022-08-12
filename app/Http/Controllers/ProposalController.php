@@ -55,8 +55,8 @@ class ProposalController extends Controller
                 'lampiran' => 'required|mimes:pdf,docx|max:5120'
             ]);
 
-            $fileName = date('d-m-Y').'_'.$request->file('file')->getClientOriginalName();  
-            $path = $request->file->move(public_path('upload'), $fileName);
+            $lampiran = date('d-m-Y').'_'.$request->file('lampiran')->getClientOriginalName();  
+            $path = $request->lampiran->move(public_path('data_proposal'), $lampiran);
 
             $data = Proposal::create([
                 'ormawa_id' => $request->ormawa_id,
@@ -65,7 +65,7 @@ class ProposalController extends Controller
                 'tema_kegiatan' => $request->tema_kegiatan,
                 'tanggal_kegiatan' => $request->tanggal_kegiatan,
                 'total_dana' => $request->total_dana,
-                'lampiran' => $request->lampiran,
+                'lampiran' => $lampiran,
             ]);
 
            return redirect('proposal') ;
@@ -126,8 +126,8 @@ class ProposalController extends Controller
                   // $request->file->unlink(public_path('upload'), $Proposal->lampiran);
                    $file_path = public_path().'/data_proposal/'.$Proposal->lampiran;
                    unlink($file_path);
-                 $fileName = date('d-m-Y').'_'.$request->file('file')->getClientOriginalName();  
-                $path = $request->file->move(public_path('data_proposal'), $fileName);
+                 $lampiran = date('d-m-Y').'_'.$request->file('lampiran')->getClientOriginalName();  
+                $path = $request->lampiran->move(public_path('data_proposal'), $lampiran);
                 $ormawa = Ormawa::all();
             DB::table('pengajuan_ormawa') -> where('id', $id) 
             -> update([
@@ -151,7 +151,7 @@ class ProposalController extends Controller
             'tema_kegiatan' => $request->tema_kegiatan,
             'tanggal_kegiatan' => $request->tanggal_kegiatan,
             'total_dana' => $request->total_dana,
-
+            'lampiran' => $request->lampiran,
         ]);
         return redirect ('proposal') ;
     }

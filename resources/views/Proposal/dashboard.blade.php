@@ -1,14 +1,15 @@
 @extends('template.app')
+
 @section('content')
-     Halaman Dashboard
-     
-<table class="table table-striped">
+<p align="center"> Halaman Dashboard </p>
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Id_Ormawa</th>
-      <th scope="col">Nama_Kegiatan</th>
-      <th scope="col">Jenis_Kegiatan</th>
+      <th scope="col"><p align="center">No</p</th>
+      <th scope="col"><p align="center">Ormawa</p</th>
+      <th scope="col"><p align="center">Nama_Kegiatan</p</th>
+      <th scope="col"><p align="center">Jenis_Kegiatan</p</th>
+      <th scope="col"><p align="center">Action</p></th>
     </tr>
   </thead>
   <tbody>

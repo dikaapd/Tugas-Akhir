@@ -23,7 +23,7 @@
         <div class="card">
           <div class="card-body">
             <form action="{{ route('ubah_data', $data->id) }}" method="POST">
-            <h4 class="card-title">Update Data Proposal</h4>
+            <h4 class="card-title"><p align="center">Update Data Proposal</p></h4>
               <div class="form-group">
                 <form class="forms-sample">
                 @method('PUT')  
@@ -60,14 +60,14 @@
                   </div>
                       @error('tema_kegiatan')
                   <div class="alert alert-danger">{{ $message }}</div>
-                      @enderror
+                  @enderror
                   <div class="form-group">
                     <label>Tanggal Kegiatan</label>
-                      <input type="dateTime" class="form-control" name="tanggal_kegiatan" value="{{$data->tema_kegiatan}}"></textarea>
+                      <input type="datetime-local" class="form-control" name="tanggal_kegiatan" value="{{$data->tanggal_kegiatan}}"></textarea>
                   </div>
-                      @error('tanggal_kegiatan')
+                  @error('tanggal_kegiatan')
                   <div class="alert alert-danger">{{ $message }}</div>
-                      @enderror
+                  @enderror
                   <div class="form-group">
                     <label >Total Dana</label>
                       <input type="text" class="form-control" name="total_dana" value="{{$data->total_dana}}"></textarea>
@@ -82,6 +82,16 @@
                       @error('lampiran')
                   <div class="alert alert-danger">{{ $message }}</div>
                       @enderror
+                  <div class="form-group">
+                    <label>Lampiran</label>
+                    <div class="input-group col-xs-12">
+                      <iframe id="ifrm" src="/data_proposal/{{$data->lampiran}}"></iframe>
+                      <input type="file" name="lampiran" id="lampiran" class="form-control file-upload-info"  placeholder="Upload Berkas">
+                      <span class="input-group-append">
+                        <button class="file-upload-browse btn btn-primary" type="button">Upload Proposal</button>
+                      </span>
+                    </div>
+                  </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
               </div>     

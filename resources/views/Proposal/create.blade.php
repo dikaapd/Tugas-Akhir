@@ -21,7 +21,7 @@
         <div class="card-body">
           <form action="{{URL('proposal/store')}}" method="POST" enctype="multipart/form-data">
             @csrf
-            <h4 class="card-title">Pengajuan Proposal</h4>    
+            <h4 class="card-title"><p align="center">Pengajuan Proposal</p></h4>    
             <div class="form-group">
               <label for="exampleSelectGender">Ormawa</label>
               <select class="form-control" name="ormawa_id" id="ormawa_id">
@@ -69,7 +69,7 @@
             <div class="form-group">
               <label>Lampiran</label>
               <div class="input-group col-xs-12">
-                <input type="file" name="file" id="file" class="form-control file-upload-info"  placeholder="Upload Berkas">
+                <input type="file" name="lampiran" id="lampiran" class="form-control file-upload-info"  placeholder="Upload Berkas">
                   <span class="input-group-append">
                     <button class="file-upload-browse btn btn-primary" type="button">Upload Proposal</button>
                   </span>
