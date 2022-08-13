@@ -9,6 +9,7 @@ Halaman Dashboard
 </head>
 <body>
   <h1>SIM Kemahasiswaan </h1>
+  <img src="{{asset('layout/images/SIM.png')}}" alt="logo"  width="100%">
   <b>SIM Kemahasiswaan </b>
   <ul>
     <li>SIM Kemahasiswaan </li>

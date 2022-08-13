@@ -1,5 +1,5 @@
-@extends('template.app')
-
+@extends('template.app')->name('update_data');
+->name('update_data');
 @section('content')
 <p align="center"> Halaman Dashboard </p>
 <table class="table table-bordered">
@@ -7,7 +7,7 @@
     <tr>
       <th scope="col"><p align="center">No</p</th>
       <th scope="col"><p align="center">Ormawa</p</th>
-      <th scope="col"><p align="center">Nama_Kegiatan</p</th>
+      <th scope="ol"><p align="center">Nama_Kegiatan</p</th>
       <th scope="col"><p align="center">Jenis_Kegiatan</p</th>
       <th scope="col"><p align="center">Action</p></th>
     </tr>

@@ -8,6 +8,8 @@ use App\Models\Ormawa;
 use Illuminate\Support\Facades\DB;
 use App\Models\Proposal;
 use Exception;
+use Auth;
+use Alert;
 use Illuminate\Http\Request;
 
 class ProposalController extends Controller

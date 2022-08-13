@@ -22,7 +22,7 @@
       <div class="col-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <form action="{{ route('ubah_data', $data->id) }}" method="POST">
+            <form action="{{ route('ubah_data', $data->id) }}" method="PUT">
             <h4 class="card-title"><p align="center">Update Data Proposal</p></h4>
               <div class="form-group">
                 <form class="forms-sample">
@@ -77,15 +77,7 @@
                       @enderror
                   <div class="form-group">
                     <label>Lampiran</label>
-                      <input type="string" class="form-control" name="lampiran"></textarea>
-                  </div>
-                      @error('lampiran')
-                  <div class="alert alert-danger">{{ $message }}</div>
-                      @enderror
-                  <div class="form-group">
-                    <label>Lampiran</label>
                     <div class="input-group col-xs-12">
-                      <iframe id="ifrm" src="/data_proposal/{{$data->lampiran}}"></iframe>
                       <input type="file" name="lampiran" id="lampiran" class="form-control file-upload-info"  placeholder="Upload Berkas">
                       <span class="input-group-append">
                         <button class="file-upload-browse btn btn-primary" type="button">Upload Proposal</button>
@@ -93,6 +85,7 @@
                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
+                  <!-- <a class="btn btn-primary" href="resources/views/dashboard"><i class="ti-home mr-2"></i>Back to home</a> -->
                 </form>
               </div>     
             </form>

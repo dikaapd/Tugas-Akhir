@@ -40,13 +40,13 @@
             <td>{{$item->jurusan->jurusan}} </td>
             <td>
               <a class="btn btn-inverse-primary btn-sm" href="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}"
-                {{-- onclick="event.preventDefault();
-                document.getElementById('ajukan-form-{{'id'}}').submit();" > --}}
+                onclick="event.preventDefault();
+                document.getElementById('ajukan-form-{{$item->id}}').submit();" >
                > Ajukan
              </a>
-             {{-- <form id='ajukan-form-{{'id'}}' action="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
+             <!-- <form id='ajukan-form-{{'id'}}' action="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
                @csrf
-               </form> --}}
+               </form>  -->
               </td>
               <td>
                 <form action="/beasiswa/{{$item->id}}" method="POST">

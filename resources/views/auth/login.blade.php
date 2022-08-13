@@ -27,12 +27,12 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="{{asset('layout/images/logo.svg')}}" alt="logo">
               </div>
               <form action="{{ route('postlogin')}}" method="post">
                 {{ csrf_field() }}
-              <h4>Selamat Datang </h4>
-              <h6 class="font-weight-light">Login Untuk Melanjutkan.</h6>
+                <img src="{{asset('layout/images/SIM.png')}}" alt="logo"  width="100%">
+              <h4><p align="center">Selamat Datang </p></h4>
+              <h6 class="font-weight-light"><p align="center">Login Untuk Melanjutkan</p></h6>
               <form class="pt-3">
                 <div class="form-group">
                   <input type="username" class="form-control form-control-lg" name="username" placeholder="Username">

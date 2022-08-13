@@ -116,12 +116,6 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{url('/proposal/create')}}">
-          <i class="icon-columns menu-icon"></i>
-          <span class="menu-title">Pengajuan Proposal</span>
-        </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="pages/documentation/documentation.html">
           <i class="icon-paper menu-icon"></i>
           <span class="menu-title">Persetujuan</span>
