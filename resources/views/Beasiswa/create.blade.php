@@ -17,64 +17,151 @@
  <!-- End plugin css for this page -->
  <!-- inject:css -->
  @section('content')
-      <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-           
-            <form action="{{URL('beasiswa/store')}}" method="POST" enctype="multipart/form-data">
-              @csrf
-            <h4 class="card-title">From Pengajuan Beasiswa</h4>
-              <div class="form-group">
-            <form class="forms-sample">
-                <label for="exampleInputName1">NIM</label>
+ <div class="col-12 ">
+  <div class="card">
+    <div class="card-body">
+      <form action="{{URL('beasiswa/store')}}" method="POST" enctype="multipart/form-data">
+        @csrf
+      <h4 class="card-title">Input Data Mahasiswa</h4>
+      <form class="form-sample">
+        <p class="card-description">
+          Personal info
+        </p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">NIM</label>
+              <div class="col-sm-9">
                 <input type="text" class="form-control" name="nim" id="nim" placeholder="Nim">
               </div>
-              <div class="form-group">
-                <label for="exampleInputEmail3">Nama</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Nama Lengkap</label>
+              <div class="col-sm-9">
                 <input type="text" class="form-control" name="nama_mhs" id="nama_mhs" placeholder="Nama Lengkap">
               </div>
-              <div class="form-group">
-                <label for="exampleSelectGender">Pilih Prodi</label>
-                  <select class="form-control" name="jurusan_id" id="jurusan_id">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Jenis Kelamin</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="jenkel" id="jenkel" placeholder="jenkel">
+                  <option > Jenis Kelamin</option>
+                  <option value="Pria">Pria</option>
+                  <option value="Wanita">Wanita</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Tempat Tanggal Lahir</label>
+              <div class="col-sm-9">
+                <input class="form-control" name="ttl" id="ttl" placeholder="dd/mm/yyyy"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Jurusan</label>
+              <div class="col-sm-9">
+                <select class="form-control"  name="jurusan_id" id="jurusan_id">
                     <option disable value> Prodi </option>
                     @foreach ($jurusan as $item)
                     <option value="{{$item->id}}">{{$item->jurusan}}</option>
                     @endforeach
-                  </select>
-                </div>
-              <div class="form-group">
-                <label for="exampleInputGaji">Gaji Orang Tua</label>
-                <input type="text" class="form-control" name="gaji_ortu" id="gaji_ortu" placeholder="Gaji">
+                </select>
               </div>
-              
-              <div class="form-group">
-                <label>Struk Gaji</label>
-                <div class="input-group col-xs-12">
-                  <input type="file" name="file" id="file" class="form-control file-upload-info"  placeholder="Upload Image">
-                  <span class="input-group-append">
-                    <button class="file-upload-browse btn btn-primary" type="button">Upload Struk Gaji</button>
-                  </span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputCity1">Tannggungan</label>
-                <input type="text" class="form-control" name="tanggungan"  id="tanggungan" placeholder="Tanggungan">
-              </div>
-              <button type="submit" class="btn btn-primary mr-2">Submit</button>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
-      @endsection
+        <p class="card-description">
+        </p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Alamat</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="alamat" id="alamat">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">No Hp</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="nohp" id="nohp" placeholder="No Hp">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Nama Orang Tua</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="nama_ortu" id="nama_ortu" placeholder="Nama Orang Tua">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">NIK</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="nik" id="nik" placeholder="Nomer Induk Kewarganegaraan">>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Gaji Orang Tua</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="gaji_ortu" id="gaji_ortu" placeholder="Gaji">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Tanggungan</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control"  name="tanggungan"  id="tanggungan" placeholder="Tanggungan">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Struk Gaji</label>
+              <div class="col-sm-9">
+                <input type="file" name="file" id="file" class="form-control file-upload-info"  placeholder="Upload Image">
+                <span class="input-group-append">
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+@endsection
 
   <!-- content-wrapper ends -->
 
   <!-- partial -->
-</div>
+
 <!-- main-panel ends -->
-</div>
+
 <!-- page-body-wrapper ends -->
-</div>  
+ 
    <!-- Plugin js for this page -->
    <script src="{{asset('layout/vendors/js/vendor.bundle.base.js')}}"></script>
    <script src="{{asset('layout/vendors/typeahead.js/typeahead.bundle.min.js')}}"></script>

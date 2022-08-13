@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -16,7 +16,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{asset('layout/css/vertical-layout-light/style.css')}}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{asset('layout/images/favicon.png')}}" />
+  <link rel="shortcut icon" href="{{asset('layout/images/logo.png')}}" />
 </head>
 
 <body>
@@ -27,7 +27,7 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="{{asset('layout/images/logo.svg')}}" alt="logo">
+                {{-- <img  src="{{asset('layout/images/logo.png')}}" alt="logo"> --}}
               </div>
               <form action="{{ route('postlogin')}}" method="post">
                 {{ csrf_field() }}
@@ -44,7 +44,7 @@
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Masuk</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
-                  Belum Mempunyai Akun ? <a href="{{url('/registrasi')}}" class="text-primary">Create</a>
+                  Belum Mempunyai Akun ? <a href="{{url('/registrasi')}}" class="text-primary">Daftar</a>
                 </div>
               </form>
             </div>
@@ -67,6 +67,7 @@
   <script src="{{asset('layout/js/template.js')}}"></script>
   <script src="{{asset('layout/js/settings.js')}}"></script>
   <script src="{{asset('layout//js/todolist.js')}}"></script>
+  @include('sweetalert::alert')
   <!-- endinject -->
 </body>
 

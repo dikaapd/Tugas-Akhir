@@ -84,7 +84,6 @@ class BeasiswaController extends Controller
             $beasiswa->status           = "Proses";
             $beasiswa->tanggal_proses   = date('Y-m-d H:i:s');
             $beasiswa->save();
-            Alert::success('Pengajuan Berhasil', 'Info Message');
         } 
         else {
             
@@ -142,11 +141,17 @@ class BeasiswaController extends Controller
                 'jurusan_id' => 'required',
                 'gaji_ortu' => 'required',
                 'tanggungan' => 'required',
+                'nik' => 'required',
+                'nohp' => 'required',
+                'nama_ortu' => 'required',
+                'alamat' => 'required',
+                'ttl' => 'required',
+                'jenkel' => 'required',
                 'file' => 'required|mimes:png,jpeg,jpg|max:2048'
             ]);
                 
         $fileName = date('d-m-Y').'_'.$request->file('file')->getClientOriginalName();  
-        $path = $request->file->move(public_path('upload'), $fileName);
+        $path = $request->file->move(public_path('data-slip-gaji'), $fileName);
          
 
 
@@ -156,9 +161,15 @@ class BeasiswaController extends Controller
                 'jurusan_id' => $request->jurusan_id,
                 'gaji_ortu' => $request->gaji_ortu,
                 'tanggungan' => $request->tanggungan,
+                'nik' => $request->nik,
+                'nohp' => $request->nohp,
+                'nama_ortu' => $request->nama_ortu,
+                'alamat' => $request->alamat,
+                'ttl' => $request->ttl,
+                'jenkel' => $request->jenkel,
                 'slip_gaji' => $fileName,
             ]);
-            Alert::success('Selamat', 'Pengajuan Behasil Dilakukan');
+            Alert::success('Pengajuan Behasil Dilakukan' , 'Hasil Dapat Dilihat Dihalaman Pengumuman Setelah Proses Seleksi');
 
             return redirect('/');
     }
@@ -211,10 +222,10 @@ class BeasiswaController extends Controller
             $Beasiswa = Beasiswa::where('id', $id)->first();    
             if ($request->file != Null){
                   // $request->file->unlink(public_path('upload'), $Beasiswa->slip_gaji);
-                   $file_path = public_path().'/upload/'.$Beasiswa->slip_gaji;
+                   $file_path = public_path().'/data-slip-gaji/'.$Beasiswa->slip_gaji;
                    unlink($file_path);
                  $fileName = date('d-m-Y').'_'.$request->file('file')->getClientOriginalName();  
-                $path = $request->file->move(public_path('upload'), $fileName);
+                $path = $request->file->move(public_path('data-slip-gaji'), $fileName);
                 $jurusan = Jurusan::all();
                 DB::table('form_pengajuan_beasiswa') -> where('id', $id) 
                 -> update([

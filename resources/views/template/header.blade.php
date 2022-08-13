@@ -13,8 +13,8 @@
         </li>
       </ul>
       <ul class="navbar-nav navbar-nav-right">
-        
         <li class="nav-item nav-profile dropdown">
+          <h6 class="dropdown-item"> {{ Auth::user()->nama }} </h6>
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
             <img src="{{asset('layout/images/faces/face28.jpg')}}" alt="profile"/>
           </a>
@@ -23,6 +23,7 @@
               <i class="ti-power-off text-primary"></i>
               Logout
             </a>
+            
           </div>
         </li>
         <li class="nav-item nav-settings d-none d-lg-flex">

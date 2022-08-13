@@ -20,6 +20,12 @@ class Beasiswa extends Model
         'slip_gaji',
         'status',
         'tanggal_proses',
+        'nik',
+        'alamat',
+        'nohp',
+        'nama_ortu',
+        'jenkel',
+        'ttl',
     ];
     protected $hidden = [];
 

@@ -25,7 +25,7 @@ class JurusanController extends Controller
     public function edit($id)
     {
         $data = DB::table('jurusan' )->where('id', $id)->first();
-        return view('kuota.edit', compact('data'));
+        // return view('kuota.edit', compact('data'));
     }
 
     /**
@@ -47,8 +47,8 @@ class JurusanController extends Controller
                     'kuota' => $request->kuota,
              ]);
 
-                Alert::success('Selamat', 'Data Berhasil Diubah');
+                Alert::success('Behasil', 'Kuota Berhasil Diubah');
 
-            return redirect ('kuota.list') ;
+            return redirect ('/kuota') ;
     }
 }
