@@ -6,6 +6,7 @@ use App\Helpers\ApiFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Jurusan;
+use App\Models\User;
 use App\Models\Beasiswa;
 use Exception;
 use Illuminate\Http\Request;
@@ -19,12 +20,42 @@ class BeasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function search(Request $request)
     {
-        
-        $data = Beasiswa::where('status' , '=' , "daftar")->paginate(7);
-        return view('Beasiswa.dashboard', compact('data'));
+        // menangkap data pencarian
+        $search = $request->search;
+        // mengambil data dari table pegawai sesuai pencarian data
+     
+        $data = DB::table('form_pengajuan_beasiswa')
+        ->where('nama_mhs','like',"%".$cari1."%");
+            // mengirim data pegawai ke view index
+        return view('Beasiswa.pengumuman', compact('data'));
     }
+    
+
+
+    public function index(Request $request)
+    {   
+        if(auth()->user()->level == 'prodi') {
+            
+            $data = Beasiswa::leftjoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
+            ->select('form_pengajuan_beasiswa.*')
+            ->where('status' , '=' , "daftar")
+            ->where('form_pengajuan_beasiswa.jurusan_id', auth()->user()->prodi_id )->paginate(7);
+            return view('Beasiswa.prodidash', compact('data'));
+        }  else {
+            
+            $data = Beasiswa::leftjoin('users', 'form_pengajuan_beasiswa.nim', '=', 'users.nim')
+            ->select('form_pengajuan_beasiswa.*')
+            ->where('status' , '=' , "daftar")->paginate(7);
+            return view('Beasiswa.dashboard', compact('data'));
+        }
+       
+
+
+    }
+
+  
 
     public function index1()
     {
@@ -216,6 +247,12 @@ class BeasiswaController extends Controller
                 'jurusan_id' => 'required',
                 'gaji_ortu' => 'required',
                 'tanggungan' => 'required',
+                'nik' => 'required',
+                'nohp' => 'required',
+                'nama_ortu' => 'required',
+                'alamat' => 'required',
+                'ttl' => 'required',
+                'jenkel' => 'required',
                 'file ' => 'mimes:png,jpeg,jpg|max:2048'
             ]);
             $jurusan = Jurusan::all();
@@ -234,6 +271,12 @@ class BeasiswaController extends Controller
                     'jurusan_id' => $request->jurusan_id,
                     'gaji_ortu' => $request->gaji_ortu,
                     'tanggungan' => $request->tanggungan,
+                    'nik' => $request->nik,
+                    'nohp' => $request->nohp,
+                    'nama_ortu' => $request->nama_ortu,
+                    'alamat' => $request->alamat,
+                    'ttl' => $request->ttl,
+                    'jenkel' => $request->jenkel,
                     'slip_gaji' => $fileName,
                 ]);
                 return redirect ('beasiswa') ;
@@ -246,6 +289,12 @@ class BeasiswaController extends Controller
                     'jurusan_id' => $request->jurusan_id,
                     'gaji_ortu' => $request->gaji_ortu,
                     'tanggungan' => $request->tanggungan,
+                    'nik' => $request->nik,
+                    'nohp' => $request->nohp,
+                    'nama_ortu' => $request->nama_ortu,
+                    'alamat' => $request->alamat,
+                    'ttl' => $request->ttl,
+                    'jenkel' => $request->jenkel,
                     
                 ]);
                 Alert::success('Selamat', 'Data Berhasil Diubah');
@@ -273,7 +322,7 @@ class BeasiswaController extends Controller
            // $data = Beasiswa::findOrFail($id);
             //$data = $data->delete();
             $data = DB::table('form_pengajuan_beasiswa')->where('id', '=' , $id);
-            $file_path = public_path().'/upload/'.$data->first()->slip_gaji;
+            $file_path = public_path().'/data-slip-gaji/'.$data->first()->slip_gaji;
             unlink($file_path);
             $data->delete();
              Alert::success( 'Data Berhasil Dihapus');

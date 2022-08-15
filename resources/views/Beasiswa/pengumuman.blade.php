@@ -2,6 +2,8 @@
 @section('content')
      <h3> Pengumuman Beasiswa</h3>
      <br>
+   
+     <br>
      
 <table class="table table-bordered">
   <thead>

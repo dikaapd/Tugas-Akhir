@@ -25,7 +25,6 @@
       <h4 class="card-title">Input Data Mahasiswa</h4>
       <form class="form-sample">
         <p class="card-description">
-          Personal info
         </p>
         <div class="row">
           <div class="col-md-6">
@@ -115,7 +114,7 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">NIK</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="nik" id="nik" placeholder="Nomer Induk Kewarganegaraan">>
+                <input type="text" class="form-control" name="nik" id="nik" placeholder="Nomer Induk Kewarganegaraan">
               </div>
             </div>
           </div>

@@ -6,9 +6,9 @@
     <!--Grid column-->
     <div class="col-md-6 mb-4">
       <form class="form-inline md-form mr-auto">
-        <form action= "usercontrol/cari" method="GET">
+        <form action= "{{ route('cari') }}" method="GET">
         <input class="form-control mr-sm-2"  name="cari" type="text" value="{{ old('cari') }}" placeholder="Search" aria-label="Search">
-        <button type="submit" class="btn btn-info mr-2">Cari</button>
+        <input type="submit" class="btn btn-info mr-2" value="Cari">
       </form>
       </form>
     </div>

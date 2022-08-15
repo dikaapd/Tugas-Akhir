@@ -40,15 +40,13 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,prodi']], function() {
   route::get('/usercontrol/registrasi', [App\Http\Controllers\LoginController::class, 'registrasimodal'])->name('registrasimodal');
   route::post('/usercontrol/postregistrasi', [App\Http\Controllers\LoginController::class, 'postregistrasimodal'])->name('postregistrasimodal');
   route::get('/usercontrol',  [App\Http\Controllers\LoginController::class, 'index1']);
-  route::get('/usercontrol/cari',  [App\Http\Controllers\LoginController::class, 'cari']);
+  route::get('/usercontrol/cari',  [App\Http\Controllers\LoginController::class, 'cari'])->name('cari');
   route::get('/usercontrol/{id}',  [App\Http\Controllers\LoginController::class, 'reset'])->name('reset.pw');
   route::get('/persetujuan',  [App\Http\Controllers\BeasiswaController::class, 'index1']);
   route::get('/pengumuman',  [App\Http\Controllers\BeasiswaController::class, 'index2']);
   route::get('/ajukan/{id}',  [App\Http\Controllers\BeasiswaController::class, 'ajukan'])->name('ajukan.beasiswa');
   route::post('/terima/{id}',  [App\Http\Controllers\BeasiswaController::class, 'terima'])->name('terima.beasiswa');
   route::post('/tolak/{id}',  [App\Http\Controllers\BeasiswaController::class, 'tolak'])->name('tolak.beasiswa');
-  route::get('/beasiswa/{id}/edit', [App\Http\Controllers\BeasiswaController::class, 'edit']);
-  route::put('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'update'])->name('update_data');
   route::delete('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class,'destroy']);
 });
 
@@ -57,6 +55,12 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,']], func
   route::post('/beasiswa/store ' , [App\Http\Controllers\BeasiswaController::class, 'store']);
   route::get('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'show']);
   route::get('/pengumuman',  [App\Http\Controllers\BeasiswaController::class, 'index2']);
+  route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
+  route::get('/beasiswa/{id}/edit', [App\Http\Controllers\BeasiswaController::class, 'edit']);
+  route::put('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'update'])->name('update_data');
+  route::get('/beasiswa/cari',  [App\Http\Controllers\BeasiswaController::class, 'search'])->name('carinnim');
+  route::get('/password/{id}/edit', [App\Http\Controllers\UpdatePasswordController::class, 'edit']);
+  route::put('/password/{id}', [App\Http\Controllers\UpdatePasswordController::class, 'update'])->name('password.update');
 });
 
 //Proposal 

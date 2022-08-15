@@ -23,7 +23,10 @@
               <i class="ti-power-off text-primary"></i>
               Logout
             </a>
-            
+            <a class="dropdown-item" href="password/{id}/edit">
+              <i class="mdi mdi-account-key"></i>
+              Reset Password
+            </a>
           </div>
         </li>
         <li class="nav-item nav-settings d-none d-lg-flex">

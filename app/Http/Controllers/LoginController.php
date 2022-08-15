@@ -67,6 +67,12 @@ public function postregistrasimodal(Request $request){
 }
    public function index1()
    {
+    
+    // $search = User::latest();
+    // if (request('cari')) {
+    //     $search->where('nama', 'like' , '%' . request('cari') . '%');
+    // }
+    
        $data = User::where('level' , '=' , "admin")
        ->orWhere ('level' , '=' , "prodi")
        ->orWhere ('level' , '=' , "mahasiswa")
@@ -82,9 +88,9 @@ public function postregistrasimodal(Request $request){
      // mengambil data dari table pegawai sesuai pencarian data
     $data = DB::table('users')
     ->where('nama','like',"%".$cari."%")
-    ->paginate();
+    ->get();
         // mengirim data pegawai ke view index
-    return view('auth.control', compact('data'));
+    return view('auth.control', ['data' => $data]);
    }
 
    public function reset($id)
@@ -95,4 +101,6 @@ public function postregistrasimodal(Request $request){
         Alert::success('Sukses', 'Password Berhasil Direset');
         return redirect()->back();
    }
+
+   
 }
