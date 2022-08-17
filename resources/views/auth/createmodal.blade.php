@@ -12,7 +12,7 @@
                     @csrf
                     <form class="pt-3">
                         <div class="form-group">
-                          <input type="text" class="form-control form-control-lg" name = "nama" placeholder="Nama Prodi">
+                          <input type="text" class="form-control form-control-lg" name = "nama" placeholder="Nama">
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control form-control-lg" name = "level" placeholder="Level">
@@ -23,11 +23,20 @@
                         <div class="form-group">
                           <input type="password" class="form-control form-control-lg" name="password" placeholder="Password">
                         </div>
+                        <div class="form-group ">
+                            <select class="form-control form-control-lg"  name="prodi_id"  placeholder="Pilih Prodi">
+                                <option disable value> Prodi </option>
+                                @foreach ($prodi as $item)
+                                @endforeach
+                                {{-- @foreach ($prodi as $item)
+                                  <option value="{{$item->id}}">{{$item->jurusan}}</option>
+                                @endforeach --}}
+                            </select>
+                        </div>
                         <div class="mt-3">
                           <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Daftar</button>
                         </div>
                     </form>
-                  </form>
                 </div>
               </div>
         </div>

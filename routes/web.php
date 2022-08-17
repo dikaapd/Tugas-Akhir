@@ -58,9 +58,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,']], func
   route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
   route::get('/beasiswa/{id}/edit', [App\Http\Controllers\BeasiswaController::class, 'edit']);
   route::put('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'update'])->name('update_data');
-  route::get('/beasiswa/cari',  [App\Http\Controllers\BeasiswaController::class, 'search'])->name('carinnim');
   route::get('/password/{id}/edit', [App\Http\Controllers\UpdatePasswordController::class, 'edit']);
   route::put('/password/{id}', [App\Http\Controllers\UpdatePasswordController::class, 'update'])->name('password.update');
+  Route::get('/pengumuman/search', [App\Http\Controllers\BeasiswaController::class, 'search'])->name('search');
 });
 
 //Proposal 

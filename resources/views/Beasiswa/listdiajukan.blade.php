@@ -2,14 +2,16 @@
 @section('content')
      <h3>Halaman List Diajukan Prodi</h3>
      <br>
-<table class="table table-bordered">
+     <div class="card-body">
+      <div class="table-responsive text-nowrap">
+      <table id="example" class="table table-striped table-secondary " style="width:100%">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nim</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Jurusan</th>
-      <th scope="col">Action</th>
+      <th>No</th>
+      <th>Nim</th>
+      <th>Nama</th>
+      <th>Jurusan</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -45,8 +47,8 @@
     @endforelse
   </tbody>
 </table>
+      </div>
+     </div>
 <br>
-<div>
-{{$data->links() }}
-</div>
+
 @endsection

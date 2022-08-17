@@ -20,22 +20,10 @@ class BeasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search(Request $request)
-    {
-        // menangkap data pencarian
-        $search = $request->search;
-        // mengambil data dari table pegawai sesuai pencarian data
-     
-        $data = DB::table('form_pengajuan_beasiswa')
-        ->where('nama_mhs','like',"%".$cari1."%");
-            // mengirim data pegawai ke view index
-        return view('Beasiswa.pengumuman', compact('data'));
-    }
-    
-
 
     public function index(Request $request)
     {   
+       
         if(auth()->user()->level == 'prodi') {
             
             $data = Beasiswa::leftjoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')

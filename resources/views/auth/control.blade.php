@@ -5,16 +5,6 @@
       <div class="row">
     <!--Grid column-->
     <div class="col-md-6 mb-4">
-      <form class="form-inline md-form mr-auto">
-        <form action= "{{ route('cari') }}" method="GET">
-        <input class="form-control mr-sm-2"  name="cari" type="text" value="{{ old('cari') }}" placeholder="Search" aria-label="Search">
-        <input type="submit" class="btn btn-info mr-2" value="Cari">
-      </form>
-      </form>
-    </div>
-    <div class="col-md-6 mb-4">
-    </div>
-    <div class="col-md-6 mb-4">
       <a href="#" class="btn btn-success mr-2" data-toggle="modal" data-target="#ModalCreate">Tambah User Prodi</a>
     </div>
       </div>
@@ -40,7 +30,7 @@
             <td>{{$item->username}} </td>
             
               <td>
-                    <a href="usercontrol/{{$item->id}}" class="btn btn-outline-info btn-sm">Reset Password</a>
+                    <a href="usercontrol/{{$item->id}}" class="btn btn-outline-primary">Reset Password</a>
                 </form>
             </td>
         </tr>

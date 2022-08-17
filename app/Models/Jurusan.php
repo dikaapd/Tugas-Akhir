@@ -19,4 +19,9 @@ class Jurusan extends Model
     {
         return $this->hasMany(Beasiswa::class);
     }
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }

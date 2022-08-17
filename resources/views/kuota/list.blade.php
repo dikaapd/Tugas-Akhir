@@ -22,8 +22,9 @@
             <td>
                 {{-- <button href="#" class="btn btn-success mr-2" data-toggle="modal" data-target="#ModalEdit">Edit</button> --}}
         <!-- Button trigger modal -->
-          <button href="/kuota/{id}/edit" type="button" class="btn btn-inverse-primary" data-toggle="modal" data-target="#edit{{$item->id}}">
+          <button href="/kuota/{id}/edit" type="button" class="btn btn-info btn-icon-text" data-toggle="modal" data-target="#edit{{$item->id}}">
             Edit
+            <i class="ti-file btn-icon-append"></i>    
           </button>
           <!-- Modal -->
           <div class="modal fade" id="edit{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
