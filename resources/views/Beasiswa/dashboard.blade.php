@@ -1,13 +1,14 @@
 @extends('template.app')
 @section('content')
 
-    <h3> Halaman List Pendaftar </h3>
+    <h3> Selamat Datang,</h3>
+    <h4> {{ Auth::user()->nama }}  </h4>
      <br/>
 
  
   <br/>
   
-<table class="table table-bordered">
+<table id="example" class="table table-striped table-bordered table-secondary " style="width:100%">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -20,6 +21,7 @@
   </thead>
   <tbody>
     @forelse ($data as $key => $item )
+    @if(auth()->user()->nim == $item->nim)
         <tr>
             <td>{{$key + 1}} </td>
             <td>{{$item->nim}} </td>
@@ -31,35 +33,26 @@
              </a> --}}
              {{$item->status}}
               </td>
-              @if(auth()->user()->nim == $item->nim)
               <td>
-                <form action="/beasiswa/{{$item->id}}" method="POST">
+                {{-- <form action="/beasiswa/{{$item->id}}" method="POST">
                     @csrf
-                    @method('delete')
-                    <a href="beasiswa/{{$item->id}}/edit" class="btn btn-info btn-sm">Detail & Edit</a>
-                    <input type="submit" class="btn btn-warning btn-sm" value="Delete">
-                </form>
+                    @method('delete') --}}
+                    <a href="beasiswa/{{$item->id}}/edit" class="btn btn-info btn-sm">
+                      <i class='fas fa-user-cog'></i>
+                      </a>
+                    {{-- <input type="submit" class="btn btn-warning btn-sm" value="Delete"> --}}
+                {{-- </form> --}}
                 </td>
-                @else
-                <td></td>
-                @endif
-            
         </tr>
+        @else
+        <td></td>
+        @endif
     @empty
     @endforelse
+   
   </tbody>
 </table>
 <br>
 <div>
-  {{-- Halaman : {{ $data->currentPage() }} <br/>
-	Jumlah Data : {{ $data->total() }} <br/>
-	Data Per Halaman : {{ $data->perPage() }} <br/> --}}
-  {{$data->links() }}
- 
 </div>
 @endsection
- {{-- <form id='ajukan-form-{{'id'}}' action="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
-               @csrf
-               </form> --}}
-               {{-- onclick="event.preventDefault();
-                document.getElementById('ajukan-form-{{'id'}}').submit();" > --}}

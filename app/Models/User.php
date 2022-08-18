@@ -22,6 +22,8 @@ class User extends Authenticatable
         'username',
         'password',
         'level',
+        'prodi_id',
+        'nim',
     ];
 
     /**
@@ -45,6 +47,8 @@ class User extends Authenticatable
     
     public function prodi()
     {
-        return $this->belongsTo(Jurusan::class);
+        return $this->belongsTo(Jurusan::class,'prodi_id' );
     }
+
+    
 }

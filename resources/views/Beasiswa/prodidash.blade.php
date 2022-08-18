@@ -3,25 +3,9 @@
 
     <h3> Halaman List Pendaftar </h3>
      <br/>
-
-  {{-- <form action="{{ route('cariprodi') }}" method="GET">
-  <ul class="navbar-nav mr-sm-2">
-    <li>Jurusan
-      <div class="input-group">
-      <select class="form-control-sm" name="cari" id="cari">
-       <option disable value> Prodi </option>
-      @foreach ($jurusan as $item)
-      <option value="{{$item->id}}">{{$item->jurusan}}</option>
-      @endforeach
-      </select>
-      <button type="submit" class="btn btn-primary mr-2">Cari</button>
-      </div>
-    </li>
-  </ul>
-  </form> --}}
   <br/>
   
-<table class="table table-bordered">
+  <table id="example" class="table table-striped t " style="width:100%">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -41,17 +25,21 @@
             <td>{{$item->nama_mhs}} </td>
             <td>{{$item->jurusan->jurusan}} </td>
             <td>
-              <a href="beasiswa/{{$item->id}}/edit" class="btn btn-info btn-sm">Detail</a>
+              <a href="beasiswa/{{$item->id}}/edit" class="btn btn-outline-dark">
+                <i class='fas fa-user-check'></i>
+                Show</a>
             </td>
               <td>
-              <a class="btn btn-inverse-primary btn-sm" href="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}"
-               > Ajukan
+              <a class="btn btn-primary btn-sm" href="{{ route('ajukan.beasiswa', ['id' => $item->id] ) }}"
+               > 
+               <i class='fas fa-user-check'></i> Ajukan
              </a>
             </form>
-            <a class="btn btn-inverse-danger btn-sm" href="{{ route('tolak.beasiswa', ['id' => $item->id] ) }}"
+            <a class="btn btn-danger btn-sm" href="{{ route('tolak.beasiswa', ['id' => $item->id] ) }}"
              onclick="event.preventDefault();
              document.getElementById('tolak-form').submit();" >
-             Tolak
+            <i class='fas fa-user-times'></i>
+            Tolak
           </a>
           <form id="tolak-form" action="{{ route('tolak.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
             @csrf

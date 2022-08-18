@@ -4,7 +4,7 @@
     <h3> Halaman Kuota Prodi </h3>
      <br/>
 
-<table class="table table-bordered">
+  <table id="example" class="table table-bordered " style="width:100%">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -22,9 +22,9 @@
             <td>
                 {{-- <button href="#" class="btn btn-success mr-2" data-toggle="modal" data-target="#ModalEdit">Edit</button> --}}
         <!-- Button trigger modal -->
-          <button href="/kuota/{id}/edit" type="button" class="btn btn-info btn-icon-text" data-toggle="modal" data-target="#edit{{$item->id}}">
+          <button href="/kuota/{id}/edit" type="button" class="btn btn-outline-success btn-md" data-toggle="modal" data-target="#edit{{$item->id}}">
+            <i style='font-size:18px' class='far'>&#xf044;</i>
             Edit
-            <i class="ti-file btn-icon-append"></i>    
           </button>
           <!-- Modal -->
           <div class="modal fade" id="edit{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

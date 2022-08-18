@@ -20,8 +20,12 @@ class Jurusan extends Model
         return $this->hasMany(Beasiswa::class);
     }
 
-    public function user()
+    // public function user()
+    // {
+    //     return $this->hasMany(User::class);
+    // }
+    public function prodi()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class,'prodi_id' );
     }
 }

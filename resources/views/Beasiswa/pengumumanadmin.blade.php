@@ -2,9 +2,12 @@
 @section('content')
 <div class="container">
 <h3> Pengumuman Beasiswa</h3>
+<br>
+
+
      <div class="card-body">
       <div class="table-responsive text-nowrap">
-      <table  class="table table-hover " style="width:100%">
+      <table id="example" class="table table-bordered " style="width:100%">
           <thead>
             <tr>
               <th>No</th>
@@ -17,7 +20,6 @@
           </thead>
           <tbody>
             @forelse ($data as $key => $item )
-            @if(auth()->user()->nim == $item->nim)
                 <tr>
                     <td>{{$key + 1}} </td>
                     <td>{{$item->nim}} </td>
@@ -26,12 +28,17 @@
                     <td>{{$item->status}} </td>
                     <td>{{$item->tanggal_proses}} </td>
                 </tr>
-                @else
-                @endif
             @empty
             @endforelse
   </tbody>
 </table>
+<div>
+  <form action="{{route('export')}}">
+  <button type="submit" class="btn btn-info btn-sm">
+    <i class='fas fa-file-download'></i>
+    EXPORT</button>
+  </form>
+</div>
 </div>
 </div>
 </div>

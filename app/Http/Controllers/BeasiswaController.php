@@ -9,6 +9,8 @@ use App\Models\Jurusan;
 use App\Models\User;
 use App\Models\Beasiswa;
 use Exception;
+use Excel;
+use App\Exports\BeasiswaExport;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -21,6 +23,11 @@ class BeasiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function pengumumanexport(){
+        return Excel::download(new BeasiswaExport, 'pengumuman.xlsx');
+       
+    }
+
     public function index(Request $request)
     {   
        
@@ -29,13 +36,13 @@ class BeasiswaController extends Controller
             $data = Beasiswa::leftjoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
             ->select('form_pengajuan_beasiswa.*')
             ->where('status' , '=' , "daftar")
-            ->where('form_pengajuan_beasiswa.jurusan_id', auth()->user()->prodi_id )->paginate(7);
+            ->where('form_pengajuan_beasiswa.jurusan_id', auth()->user()->prodi_id )->paginate();
             return view('Beasiswa.prodidash', compact('data'));
         }  else {
             
             $data = Beasiswa::leftjoin('users', 'form_pengajuan_beasiswa.nim', '=', 'users.nim')
             ->select('form_pengajuan_beasiswa.*')
-            ->where('status' , '=' , "daftar")->paginate(7);
+            ->where('status' , '=' , "daftar")->paginate();
             return view('Beasiswa.dashboard', compact('data'));
         }
        
@@ -47,7 +54,7 @@ class BeasiswaController extends Controller
 
     public function index1()
     {
-        $data = Beasiswa::where('status' , '=' , "proses")->paginate(7);
+        $data = Beasiswa::where('status' , '=' , "proses")->paginate();
         return view('Beasiswa.listdiajukan', compact('data'));
         
     
@@ -55,10 +62,14 @@ class BeasiswaController extends Controller
 
     public function index2()
     {
-        $data = Beasiswa::where('status' , '=' , "diterima")->orWhere('status' , '=' , "ditolak")->paginate(7);
+        if(auth()->user()->level == 'prodi' or auth()->user()->level == 'admin') {
+
+        $data = Beasiswa::where('status' , '=' , "diterima")->orWhere('status' , '=' , "ditolak")->paginate();
+        return view('Beasiswa.pengumumanadmin', compact('data'));
+        } else {
+        $data = Beasiswa::where('status' , '=' , "diterima")->orWhere('status' , '=' , "ditolak")->paginate();
         return view('Beasiswa.pengumuman', compact('data'));
-        
-    
+        }
     }
 
     // private function kuota($jurusan_id)
@@ -103,6 +114,7 @@ class BeasiswaController extends Controller
             $beasiswa->status           = "Proses";
             $beasiswa->tanggal_proses   = date('Y-m-d H:i:s');
             $beasiswa->save();
+            Alert::success('Pengajuan Behasil Dilakukan');
         } 
         else {
             
@@ -141,9 +153,10 @@ class BeasiswaController extends Controller
     public function create()
     {
         //
+        $users = User::all();
         $jurusan = Jurusan::all();
         // Alert::success('Congrats', 'You\'ve Successfully Registered');  
-        return view('beasiswa.create' , compact('jurusan'));
+        return view('beasiswa.create' , compact('jurusan','users'));
     }
 
     /**
@@ -187,6 +200,12 @@ class BeasiswaController extends Controller
                 'ttl' => $request->ttl,
                 'jenkel' => $request->jenkel,
                 'slip_gaji' => $fileName,
+            ]);
+
+            
+            $users = User::where('id', auth()->user()->id)
+            ->update([
+                'nim' => $request->nim,
             ]);
             Alert::success('Pengajuan Behasil Dilakukan' , 'Hasil Dapat Dilihat Dihalaman Pengumuman Setelah Proses Seleksi');
 
@@ -285,6 +304,12 @@ class BeasiswaController extends Controller
                     'jenkel' => $request->jenkel,
                     
                 ]);
+                DB::table('users') -> where('id', auth()->user()->id) 
+                -> update([
+                    'nim' => $request->nim,  
+                ]);
+                
+
                 Alert::success('Selamat', 'Data Berhasil Diubah');
 
             return redirect ('beasiswa') ;

@@ -55,13 +55,12 @@ class LoginController extends Controller
         // $data = DB::table('users')
         // ->leftJoin('jurusan', 'jurusan.id', '=', 'users.prodi_id')
         // ->get();
-        $prodi = Jurusan::all();
-        dd(request('jurusan'));
-        return view ('auth.createmodal' , compact('prodi'));
+        $program_studi = Jurusan::all();
+        return view ('auth.control' , compact('prodi'));
 }
 
 public function postregistrasimodal(Request $request){
-   //dd($request -> all());
+//    dd($request->all());
 
    User::create([
        'nama' => $request->nama,
@@ -79,11 +78,12 @@ public function postregistrasimodal(Request $request){
    {
     
         $prodi = Jurusan::all();
-       $data = User::where('level' , '=' , "admin")
+       $data = User::with('prodi')
+       ->where('level' , '=' , "admin")
        ->orWhere ('level' , '=' , "prodi")
        ->orWhere ('level' , '=' , "mahasiswa")
-       ->paginate(5);
-       return view('auth.control', compact('data'));
+       ->get();
+       return view('auth.control', compact('data','prodi'));
    }
 
   
