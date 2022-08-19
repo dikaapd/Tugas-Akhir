@@ -3,14 +3,27 @@
            <h3 class="font-weight-bold">Welcome {{ Auth::user()->nama }}</h3>
           <h6 class="font-weight-normal mb-0">Selamat Datang Di SIM KEMAHASISWAAN....</span></h6>
     <br>
-      <div class="row">
       <div class="col-md-6 grid-margin stretch-card">
-        <div class="card tale-bg">
-          <div class="card-people mt-auto">
-            <img src="images/dashboard/people.svg" alt="people">
-            <div class="weather-info">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="..." class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="..." class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="..." class="d-block w-100" alt="...">
             </div>
           </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
       </div>
       <div class="col-md-6 grid-margin transparent">
@@ -75,11 +88,12 @@
               <tbody>
                
                 <tr>
-                  @forelse ($kuotaprodi as $key => $item )
+                  @forelse ($sisakuota as $key => $item )
                   {{-- <td> {{$kuotaprodi}}</td> --}}
                   <td> {{$key + 1}} </td>
-                  <td> {{$item->jurusan->jurusan}}</td>
-                  <td> </td>
+                  <td> {{$item->jurusan}}</td>
+                  <td> {{$item->total_daftar}} </td>
+                  <td>{{$item->sisa_kuota}}</td>
                 </tr>
                 @empty
                 @endforelse

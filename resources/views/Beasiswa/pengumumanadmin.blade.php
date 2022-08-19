@@ -4,7 +4,11 @@
 <h3> Pengumuman Beasiswa</h3>
 <br>
 
-
+<form action="{{route('export')}}">
+  <button type="submit" class="btn btn-info ">
+    <i class='fas fa-file-download'></i>
+    EXPORT</button>
+  </form>
      <div class="card-body">
       <div class="table-responsive text-nowrap">
       <table id="example" class="table table-bordered " style="width:100%">
@@ -33,11 +37,7 @@
   </tbody>
 </table>
 <div>
-  <form action="{{route('export')}}">
-  <button type="submit" class="btn btn-info btn-sm">
-    <i class='fas fa-file-download'></i>
-    EXPORT</button>
-  </form>
+  
 </div>
 </div>
 </div>

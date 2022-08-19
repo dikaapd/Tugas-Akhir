@@ -28,6 +28,7 @@ route::post('/postregistrasi', [App\Http\Controllers\LoginController::class, 'po
 Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,bem,ormawa,admin_mhs']], function() {
     route::get('/', [App\Http\Controllers\DashboardController::class, 'dashboard']);
     route::get('/', [App\Http\Controllers\DashboardController::class, 'kuota']);
+    // route::get('/', [App\Http\Controllers\BeasiswaController::class, 'ajukan']);
    
   });
 
