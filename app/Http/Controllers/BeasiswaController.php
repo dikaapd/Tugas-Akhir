@@ -98,8 +98,9 @@ class BeasiswaController extends Controller
             WHEN (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id)) IS NULL THEN jurusan.id
             ELSE (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id))
         END AS kuota_tersisa
-    FROM form_pengajuan_beasiswa INNER JOIN jurusan ON form_pengajuan_beasiswa.jurusan_id = jurusan.id
-    WHERE form_pengajuan_beasiswa.status = 'proses' AND jurusan.id =   $jurusan_id")[0];
+        FROM form_pengajuan_beasiswa INNER JOIN jurusan ON form_pengajuan_beasiswa.jurusan_id = jurusan.id
+        WHERE (form_pengajuan_beasiswa.status = 'proses' OR form_pengajuan_beasiswa.status = 'diterima' 
+        OR form_pengajuan_beasiswa.status = 'ditolak') AND jurusan.id =   $jurusan_id")[0];
     }
 
     public function ajukan($id, Request $request)                                                                                                                    
@@ -139,6 +140,17 @@ class BeasiswaController extends Controller
         DB::table('form_pengajuan_beasiswa') -> where('id', $id) 
                 -> update([
                     'status' => 'ditolak',
+                    'tanggal_proses' => date('Y-m-d H:i:s')
+                ]);
+        return redirect()->back();
+    
+    }
+
+    public function daftar($id, Request $request)                                                                                                                    
+    {
+        DB::table('form_pengajuan_beasiswa') -> where('id', $id) 
+                -> update([
+                    'status' => 'daftar',
                     'tanggal_proses' => date('Y-m-d H:i:s')
                 ]);
         return redirect()->back();

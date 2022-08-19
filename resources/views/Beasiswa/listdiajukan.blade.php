@@ -22,6 +22,7 @@
             <td>{{$item->nama_mhs}} </td>
             <td>{{$item->jurusan->jurusan}} </td>
             <td>
+              @if(auth()->user()->level == 'admin')
                 <a class="btn btn btn-info btn-sm" href="{{ route('terima.beasiswa', ['id' => $item->id] ) }}"
                     onclick="event.preventDefault();
                     document.getElementById('terima-form').submit();" >
@@ -31,6 +32,17 @@
                    @csrf
                    </form> 
                 </form>
+                @else
+                <a class="btn btn btn-info btn-sm" href="{{ route('daftar.beasiswa', ['id' => $item->id] ) }}"
+                  onclick="event.preventDefault();
+                  document.getElementById('terima-form').submit();" >
+                  Revisi
+               </a>
+               <form id="terima-form" action="{{ route('daftar.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
+                 @csrf
+                 </form> 
+              </form>
+                @endif
             </td>
         </tr>
     @empty

@@ -8,7 +8,7 @@
  
   <br/>
   
-<table id="example" class="table table-striped table-bordered table-secondary " style="width:100%">
+<table class="table table-hover " style="width:100%">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -37,7 +37,7 @@
                 {{-- <form action="/beasiswa/{{$item->id}}" method="POST">
                     @csrf
                     @method('delete') --}}
-                    <a href="beasiswa/{{$item->id}}/edit" class="btn btn-info btn-sm">
+                    <a href="beasiswa/{{$item->id}}/edit" class="btn btn-info btn-md">
                       <i class='fas fa-user-cog'></i>
                       </a>
                     {{-- <input type="submit" class="btn btn-warning btn-sm" value="Delete"> --}}
@@ -45,7 +45,7 @@
                 </td>
         </tr>
         @else
-        <td></td>
+        
         @endif
     @empty
     @endforelse

@@ -12,7 +12,8 @@
           <i class="mdi mdi-account menu-icon"></i>
           <span class="menu-title">List Yang Diajukan</span>
         </a>
-      </li> <li class="nav-item">
+      </li> 
+      <li class="nav-item">
         <a class="nav-link" href="{{url('/usercontrol')}}">
           <i class="mdi mdi-account menu-icon"></i>
           <span class="menu-title">User Control</span>
@@ -33,6 +34,12 @@
           <span class="menu-title">List Pendaftar</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url('/persetujuan')}}">
+          <i class="mdi mdi-account menu-icon"></i>
+          <span class="menu-title">List Yang Diajukan</span>
+        </a>
+      </li> 
       @else
       @endif
       @if (auth()->user()->level=="mahasiswa")
