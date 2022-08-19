@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use App\Models\Jurusan;
+use App\Models\Beasiswa;
 use Auth;
 use Alert;
 // use RealRashid\SweetAlert\Facades\Alert;
@@ -47,18 +50,24 @@ class LoginController extends Controller
         return redirect ('login');
    }
 
-   public function registrasimodal(){
-    return view ('auth.createmodal');
+    public function registrasimodal(){
+
+        // $data = DB::table('users')
+        // ->leftJoin('jurusan', 'jurusan.id', '=', 'users.prodi_id')
+        // ->get();
+        $program_studi = Jurusan::all();
+        return view ('auth.control' , compact('prodi'));
 }
 
 public function postregistrasimodal(Request $request){
-   //dd($request -> all());
+//    dd($request->all());
 
    User::create([
        'nama' => $request->nama,
        'username' => $request->username,
        'password' => bcrypt($request->password),
        'level' => $request->level,
+       'prodi_id' => $request->prodi_id,
        'remember_token' => Str::random(60),
    ]);
    Alert::success('Congrats', 'You\'ve Successfully Registered');
@@ -67,25 +76,17 @@ public function postregistrasimodal(Request $request){
 }
    public function index1()
    {
-       $data = User::where('level' , '=' , "admin")
+    
+        $prodi = Jurusan::all();
+       $data = User::with('prodi')
+       ->where('level' , '=' , "admin")
        ->orWhere ('level' , '=' , "prodi")
        ->orWhere ('level' , '=' , "mahasiswa")
-       ->paginate(5);
-       return view('auth.control', compact('data'));
+       ->get();
+       return view('auth.control', compact('data','prodi'));
    }
 
-   public function cari(Request $request)
-   {
-     // menangkap data pencarian
-	$cari = $request->cari;
- 
-     // mengambil data dari table pegawai sesuai pencarian data
-    $data = DB::table('users')
-    ->where('nama','like',"%".$cari."%")
-    ->paginate();
-        // mengirim data pegawai ke view index
-    return view('auth.control', compact('data'));
-   }
+  
 
    public function reset($id)
    {
@@ -95,4 +96,6 @@ public function postregistrasimodal(Request $request){
         Alert::success('Sukses', 'Password Berhasil Direset');
         return redirect()->back();
    }
+
+   
 }

@@ -27,28 +27,33 @@ route::post('/postregistrasi', [App\Http\Controllers\LoginController::class, 'po
 //Dashboard
 Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,bem,ormawa,admin_mhs']], function() {
     route::get('/', [App\Http\Controllers\DashboardController::class, 'dashboard']);
+    route::get('/', [App\Http\Controllers\DashboardController::class, 'kuota']);
+    // route::get('/', [App\Http\Controllers\BeasiswaController::class, 'ajukan']);
+   
   });
 
 
 
 //Beasiswa
-Route::group(['middleware' => ['auth', 'ceklevel:admin,prodi']], function() { 
-  route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
+Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() { 
   route::get('/kuota',  [App\Http\Controllers\JurusanController::class, 'index']);
   route::get('/kuota/{id}/edit', [App\Http\Controllers\JurusanController::class, 'edit']);
   route::put('/kuota/{id}', [App\Http\Controllers\JurusanController::class, 'update'])->name('update_kuota');
-  route::get('/usercontrol/registrasi', [App\Http\Controllers\LoginController::class, 'registrasimodal'])->name('registrasimodal');
   route::post('/usercontrol/postregistrasi', [App\Http\Controllers\LoginController::class, 'postregistrasimodal'])->name('postregistrasimodal');
   route::get('/usercontrol',  [App\Http\Controllers\LoginController::class, 'index1']);
-  route::get('/usercontrol/cari',  [App\Http\Controllers\LoginController::class, 'cari']);
+  route::post('/terima/{id}',  [App\Http\Controllers\BeasiswaController::class, 'terima'])->name('terima.beasiswa');
+});
+
+
+Route::group(['middleware' => ['auth', 'ceklevel:admin,prodi']], function() { 
+  route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
   route::get('/usercontrol/{id}',  [App\Http\Controllers\LoginController::class, 'reset'])->name('reset.pw');
   route::get('/persetujuan',  [App\Http\Controllers\BeasiswaController::class, 'index1']);
   route::get('/pengumuman',  [App\Http\Controllers\BeasiswaController::class, 'index2']);
+  route::get('/pengumuman/export',  [App\Http\Controllers\BeasiswaController::class, 'pengumumanexport'])->name('export');
   route::get('/ajukan/{id}',  [App\Http\Controllers\BeasiswaController::class, 'ajukan'])->name('ajukan.beasiswa');
-  route::post('/terima/{id}',  [App\Http\Controllers\BeasiswaController::class, 'terima'])->name('terima.beasiswa');
+  route::post('/daftar/{id}',  [App\Http\Controllers\BeasiswaController::class, 'daftar'])->name('daftar.beasiswa');
   route::post('/tolak/{id}',  [App\Http\Controllers\BeasiswaController::class, 'tolak'])->name('tolak.beasiswa');
-  route::get('/beasiswa/{id}/edit', [App\Http\Controllers\BeasiswaController::class, 'edit']);
-  route::put('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'update'])->name('update_data');
   route::delete('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class,'destroy']);
 });
 
@@ -57,6 +62,11 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,']], func
   route::post('/beasiswa/store ' , [App\Http\Controllers\BeasiswaController::class, 'store']);
   route::get('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'show']);
   route::get('/pengumuman',  [App\Http\Controllers\BeasiswaController::class, 'index2']);
+  route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);
+  route::get('/beasiswa/{id}/edit', [App\Http\Controllers\BeasiswaController::class, 'edit']);
+  route::put('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'update'])->name('update_data');
+  route::get('/password/{id}/edit', [App\Http\Controllers\UpdatePasswordController::class, 'edit']);
+  route::put('/password/{id}', [App\Http\Controllers\UpdatePasswordController::class, 'update'])->name('password.update');
 });
 
 //Proposal 
