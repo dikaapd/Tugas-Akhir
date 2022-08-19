@@ -10,7 +10,7 @@ class Proposal extends Model
     use HasFactory;
 
     protected $table = 'pengajuan_ormawa';
-    protected $primary = 'id';
+    // protected $primary = 'id';
     protected $fillable = [
         'ormawa_id',
         'nama_kegiatan',
@@ -21,7 +21,10 @@ class Proposal extends Model
         'lampiran',
     ];
 
-    protected$hidden = [];
+    protected $hidden = [];
 
-
+    public function ormawa()
+    {
+        return $this->belongsTo(Ormawa::class);
+    }
 }
