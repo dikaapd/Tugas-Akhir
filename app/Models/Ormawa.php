@@ -9,10 +9,10 @@ class Ormawa extends Model
 {
     use HasFactory;
     protected $table = "ormawa";
-    protected $primaryKey = "id" ;
+    protected $primaryKey = "id";
     protected $fillable = [
         'id',
-        'Ormawa',
+        'ormawa',
     ];
 
     public function proposal()

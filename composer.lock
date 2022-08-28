@@ -2205,6 +2205,17 @@
             "time": "2022-07-24T11:55:47+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "nesbot/carbon",
+            "version": "2.61.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/briannesbitt/Carbon.git",
+                "reference": "bdf4f4fe3a3eac4de84dbec0738082a862c68ba6"
+            },
+            "dist": {
+                "type": "zip",
+=======
             "name": "myclabs/php-enum",
             "version": "1.8.4",
             "source": {
@@ -2277,6 +2288,7 @@
             },
             "dist": {
                 "type": "zip",
+>>>>>>> 6c9ba3b746fa803f63dd43324ed8c72cb94ea41c
                 "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bdf4f4fe3a3eac4de84dbec0738082a862c68ba6",
                 "reference": "bdf4f4fe3a3eac4de84dbec0738082a862c68ba6",
                 "shasum": ""
@@ -2638,6 +2650,25 @@
             "time": "2022-01-27T09:35:39+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "phpoption/phpoption",
+            "version": "1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/schmittjoh/php-option.git",
+                "reference": "dc5ff11e274a90cc1c743f66c9ad700ce50db9ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/dc5ff11e274a90cc1c743f66c9ad700ce50db9ab",
+                "reference": "dc5ff11e274a90cc1c743f66c9ad700ce50db9ab",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5 || ^8.0"
+            },
+            "require-dev": {
+=======
             "name": "phpoffice/phpspreadsheet",
             "version": "1.24.1",
             "source": {
@@ -2759,6 +2790,7 @@
                 "php": "^7.2.5 || ^8.0"
             },
             "require-dev": {
+>>>>>>> 6c9ba3b746fa803f63dd43324ed8c72cb94ea41c
                 "bamarni/composer-bin-plugin": "^1.8",
                 "phpunit/phpunit": "^8.5.28 || ^9.5.21"
             },
@@ -6562,6 +6594,18 @@
         },
         {
             "name": "laravel/sail",
+<<<<<<< HEAD
+            "version": "v1.15.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sail.git",
+                "reference": "853dea1fa866a52a93beccc4e5affdc49b98e7d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/853dea1fa866a52a93beccc4e5affdc49b98e7d5",
+                "reference": "853dea1fa866a52a93beccc4e5affdc49b98e7d5",
+=======
             "version": "v1.15.2",
             "source": {
                 "type": "git",
@@ -6572,6 +6616,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/8eb6d7116deda5b0e26153c1993f3e326d67768c",
                 "reference": "8eb6d7116deda5b0e26153c1993f3e326d67768c",
+>>>>>>> 6c9ba3b746fa803f63dd43324ed8c72cb94ea41c
                 "shasum": ""
             },
             "require": {
@@ -6618,7 +6663,11 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
+<<<<<<< HEAD
+            "time": "2022-08-17T13:17:15+00:00"
+=======
             "time": "2022-08-08T20:02:04+00:00"
+>>>>>>> 6c9ba3b746fa803f63dd43324ed8c72cb94ea41c
         },
         {
             "name": "mockery/mockery",
@@ -8620,5 +8669,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
