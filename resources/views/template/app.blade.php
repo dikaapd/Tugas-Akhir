@@ -6,13 +6,14 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>Kemahasiswaan Polteknik TEDC Bandung</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{asset('layout/vendors/feather/feather.css')}}">
   <link rel="stylesheet" href="{{asset('layout/vendors/ti-icons/css/themify-icons.css')}}">
   <link rel="stylesheet" href="{{asset('layout/vendors/css/vendor.bundle.base.css')}}">
   <link rel="stylesheet" href="{{asset('layout/vendors/mdi/css/materialdesignicons.min.css')}}">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- endinject -->
   <!-- Plugin css for this page -->
   <link rel="stylesheet" href="{{asset('layout/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
@@ -22,7 +23,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{asset('layout/css/vertical-layout-light/style.css')}}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{asset('layout/images/favicon.png')}}" />
+  <link rel="shortcut icon" href="{{asset('layout/images/logo.png')}}" />
 </head>
 <body>
   <div class="container-scroller">
@@ -158,7 +159,7 @@
           <div class="row">
             <div class="col-md-12 grid-margin">
               <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                <div class="col-12 col-xl-12 mb-4 mb-xl-0">
                   @yield('content')
                 </div>
               </div>
@@ -201,6 +202,9 @@
   <script src="{{asset('layout/js/dashboard.js')}}"></script>
   <script src="{{asset('layout/js/Chart.roundedBarCharts.js')}}"></script>
   <!-- End custom js for this page-->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>

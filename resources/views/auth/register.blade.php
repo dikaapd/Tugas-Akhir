@@ -16,9 +16,9 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{asset('layout/css/vertical-layout-light/style.css')}}">
   <!-- endinject -->
-  <link rel="shortcut icon" href="{{asset('layout/images/favicon.png')}}" />
+  <link rel="shortcut icon" href="{{asset('layout/images/logo.png')}}" />
 </head>
-
+@include('sweetalert::alert')
 <body>
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -27,9 +27,10 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="{{asset('layout/images/logo.svg')}}" alt="logo">
+                {{-- <img src="{{asset('layout/images/logo.svg')}}" alt="logo"> --}}
               </div>
-              <h6 class="font-weight-light">Daftar untuk bisa login di Kemahasiswaan</h6>
+              <img src="{{asset('layout/images/SIM.png')}}" alt="logo"  width="100%">
+              <h6 class="font-weight-light"><p align="center">Daftar untuk bisa login di Kemahasiswaan</p></h6>
               <form action="{{ route('postregistrasi')}}" method="POST">
                 {{ csrf_field() }}
               <form class="pt-3">

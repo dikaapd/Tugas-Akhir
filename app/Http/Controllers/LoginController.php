@@ -35,13 +35,14 @@ class LoginController extends Controller
 
     public function postregistrasi(Request $request){
         //dd($request -> all());
-
+        
         User::create([
             'nama' => $request->nama,
             'username' => $request->username,
             'password' => bcrypt($request->password),
             'remember_token' => Str::random(60),
         ]);
+        Alert::success('Selamat', 'Berhasil Melakukan Registrasi');
 
         return redirect ('login');
    }
@@ -91,6 +92,7 @@ public function postregistrasimodal(Request $request){
         $data = User::find($id);
         $data->password = hash::make('password');
         $data->update();
-        return redirect()->back()->with('Password Berhasil Di Reset');
+        Alert::success('Sukses', 'Password Berhasil Direset');
+        return redirect()->back();
    }
 }

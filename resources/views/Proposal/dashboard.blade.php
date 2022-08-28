@@ -1,5 +1,4 @@
-@extends('template.app')->name('update_data');
-->name('update_data');
+@extends('template.app')
 @section('content')
 <p align="center"> Halaman Dashboard </p>
 <table class="table table-bordered">

@@ -70,7 +70,7 @@ class ProposalController extends Controller
                 'lampiran' => $lampiran,
             ]);
 
-           return redirect('proposal') ;
+           return redirect('home') ;
     }
 
     /**
@@ -118,10 +118,6 @@ class ProposalController extends Controller
                 'lampiran' => 'required|mimes:pdf,docx|max:5120'
             ]);
 
-           // $mhs = Proposal::find($id);
-
-           // $mhs = pengajuan::leftjoin('prodi', 'prodi.id_prodi', '=' , 'pengajuan.id_prodi')->where('status', 1) ->where('id_prodi', auth()->user()->id_prodi) -> get();
-            //
             $ormawa = Ormawa::all();
             $Proposal = Proposal::where('id', $id)->first();    
             if ($request->file != Null){
@@ -158,10 +154,7 @@ class ProposalController extends Controller
         return redirect ('proposal') ;
     }
 
-    // $mhs = Beasiswa::find($id);
 
-           // $mhs = pengajuan::leftjoin('prodi', 'prodi.id_prodi', '=' , 'pengajuan.id_prodi')->where('status', 1) ->where('id_prodi', auth()->user()->id_prodi) -> get();
-            //
     
     /** 
      * Remove the specified resource from storage.
