@@ -26,6 +26,8 @@ class Beasiswa extends Model
         'nama_ortu',
         'jenkel',
         'ttl',
+        'ipk',
+        'thn_ajaran',   
     ];
     protected $hidden = [];
 

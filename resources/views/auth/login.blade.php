@@ -27,20 +27,34 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                {{-- <img  src="{{asset('layout/images/logo.png')}}" alt="logo"> --}}
+                {{-- <img src="{{asset('layout/images/1.png')}}" alt="logo" width="100%"> --}}
               </div>
               <form action="{{ route('postlogin')}}" method="post">
                 {{ csrf_field() }}
+<<<<<<< HEAD
                 <img src="{{asset('layout/images/SIM.png')}}" alt="logo"  width="100%">
               <h4><p align="center">Selamat Datang </p></h4>
               <h6 class="font-weight-light"><p align="center">Login Untuk Melanjutkan</p></h6>
+=======
+                <img src="{{asset('layout/images/2.png')}}" alt="logo" width="100%">
+                <br>  
+                <br>
+              <h4 align="center"><p> Selamat Datang </p> </h4>
+              <h6  align="center" class="font-weight-light">Login Untuk Melanjutkan</h6>
+>>>>>>> 26004eb272596d90657ba8b2584d940115f9b65a
               <form class="pt-3">
                 <div class="form-group">
                   <input type="username" class="form-control form-control-lg" name="username" placeholder="Username">
                 </div>
+                @error('username')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" name="password" placeholder="Password">
                 </div>
+                @error('password')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
                 <div class="mt-3">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Masuk</button>
                 </div>

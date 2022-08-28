@@ -16,10 +16,16 @@ class ApiBeasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $data = Beasiswa::all();
+            $search     = $request->search;
+            // return ApiFormatter::createApi(200, 'Succes', $search);
+            if ($search == null) {
+                $data = Beasiswa::get();
+            } else {
+                $data = Beasiswa::where('nama_mhs', 'like', '%' . $search . '%')->get();
+            }
 
             if ($data) {
                 return ApiFormatter::createApi(200, 'Succes', $data);
@@ -60,7 +66,14 @@ class ApiBeasiswaController extends Controller
         $beasiswa->jurusan_id = $request->jurusan_id;
         $beasiswa->gaji_ortu = $request->gaji_ortu;
         $beasiswa->tanggungan = $request->tanggungan;
+        $beasiswa->nik = $request->nik;
+        $beasiswa->nohp = $request->nohp;
+        $beasiswa->nama_ortu = $request->nama_ortu;
+        $beasiswa->alamat = $request->alamat;
+        $beasiswa->ttl = $request->ttl;
+        $beasiswa->jenkel = $request->jenkel;
         $beasiswa->slip_gaji = $path;
+
         $beasiswa->save();
 
         return ApiFormatter::createApi(200, 'Data Berhasil Dimasukan');
@@ -158,8 +171,9 @@ class ApiBeasiswaController extends Controller
         }
     }
 
-    public function search($nim)
+    function search($nim)
     {
+        // return Beasiswa::where("nama_mhs","like","%".$nama_mhs."%")->get();
         $data = Beasiswa::where('nim', '=', $nim)->get();
 
         if ($data) {

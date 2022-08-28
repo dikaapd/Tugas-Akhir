@@ -15,9 +15,7 @@ class CreateTableOrmawa extends Migration
     {
         Schema::create('ormawa', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('ketua');
-            $table->string('keterangan');
+            $table->string('ormawa');
             $table->timestamps();
         });
     }

@@ -25,7 +25,6 @@
       <h4 class="card-title">Input Data Mahasiswa</h4>
       <form class="form-sample">
         <p class="card-description">
-          Personal info
         </p>
         <div class="row">
           <div class="col-md-6">
@@ -33,6 +32,9 @@
               <label class="col-sm-3 col-form-label">NIM</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" name="nim" id="nim" placeholder="Nim">
+                @error('nim')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
           </div>
@@ -41,6 +43,9 @@
               <label class="col-sm-3 col-form-label">Nama Lengkap</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" name="nama_mhs" id="nama_mhs" placeholder="Nama Lengkap">
+                @error('nama_mhs')
+               <div class="alert alert-danger">{{ $message }}</div>
+               @enderror
               </div>
             </div>
           </div>
@@ -55,6 +60,9 @@
                   <option value="Pria">Pria</option>
                   <option value="Wanita">Wanita</option>
                 </select>
+                @error('jenkel')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
           </div>
@@ -62,7 +70,10 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">Tempat Tanggal Lahir</label>
               <div class="col-sm-9">
-                <input class="form-control" name="ttl" id="ttl" placeholder="dd/mm/yyyy"/>
+                <input class="form-control" name="ttl" id="ttl" placeholder="Place, dd/mm/yyyy"/>
+                @error('ttl')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
           </div>
@@ -81,15 +92,30 @@
               </div>
             </div>
           </div>
+        
+        <div class="col-md-6">
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label">IPK</label>
+            <div class="col-sm-9">
+              <input class="form-control" name="ipk" id="ipk" placeholder="IPK Terakhir"/>
+              @error('ipk')
+              <div class="alert alert-danger">{{ $message }}</div>
+              @enderror
+            </div>
+          </div>
         </div>
+      </div>
         <p class="card-description">
         </p>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Alamat</label>
+              <label class="col-sm-3 col-form-label">Tahun Ajaran</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="alamat" id="alamat">
+                <input type="text" class="form-control" name="thn_ajaran" id="thn_ajaran">
+                @error('alamat')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
           </div>
@@ -98,6 +124,9 @@
               <label class="col-sm-3 col-form-label">No Hp</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" name="nohp" id="nohp" placeholder="No Hp">
+                @error('nohp')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
           </div>
@@ -108,6 +137,9 @@
               <label class="col-sm-3 col-form-label">Nama Orang Tua</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" name="nama_ortu" id="nama_ortu" placeholder="Nama Orang Tua">
+                @error('nama_ortu')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
           </div>
@@ -115,7 +147,10 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">NIK</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="nik" id="nik" placeholder="Nomer Induk Kewarganegaraan">>
+                <input type="text" class="form-control" name="nik" id="nik" placeholder="Nomer Induk Kewarganegaraan">
+                @error('nik')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
           </div>
@@ -123,9 +158,12 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Gaji Orang Tua</label>
+              <label class="col-sm-3 col-form-label">Alamat</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" name="gaji_ortu" id="gaji_ortu" placeholder="Gaji">
+                <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat">
+                @error('alamat')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
           </div>
@@ -134,6 +172,20 @@
               <label class="col-sm-3 col-form-label">Tanggungan</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control"  name="tanggungan"  id="tanggungan" placeholder="Tanggungan">
+                @error('tanggungan')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Gaji Orang Tua</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" name="gaji_ortu" id="gaji_ortu" placeholder="Gaji">
+                @error('gaji_ortu')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
               </div>
             </div>
           </div>

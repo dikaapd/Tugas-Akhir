@@ -15,7 +15,7 @@ class CreatePengajuanOrmawa extends Migration
     {
         Schema::create('pengajuan_ormawa', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ormawa_id')->constrained('ormawa');;
+            $table->foreignId('ormawa_id');
             $table->string('nama_kegiatan');
             $table->string('jenis_kegiatan');
             $table->string('tema_kegiatan');

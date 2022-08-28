@@ -3,9 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ApiBeasiswaController;
+use App\Http\Controllers\API\ApiProposalController;
 use App\Http\Controllers\API\JurusanController;
+use App\Http\Controllers\API\OrmawaController;
 use App\Http\Controllers\API\UserBeasiswaController;
-use App\Http\Controllers\BeasiswaController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,6 +30,15 @@ Route::get('beasiswa/show/{id}', [ApiBeasiswaController::class, 'show']);
 Route::post('beasiswa/update/{id}', [ApiBeasiswaController::class, 'update']);
 Route::get('beasiswa/destroy/{id}', [ApiBeasiswaController::class, 'destroy']);
 Route::get('jurusan', [JurusanController::class, 'list']);
-//Register & Login Untuk di android
-Route::post('beasiswauser/register', [UserBeasiswaController::class, 'register']);
-Route::post('beasiswauser/login', [UserBeasiswaController::class, 'login']);
+//-------------------------------------------------------------------------------
+Route::get('proposal', [ApiProposalController::class, 'index']);
+
+Route::POST('proposal', [ApiProposalController::class, 'store']);
+Route::get('proposal/show/{id}', [ApiProposalController::class, 'show']);
+Route::get('proposal/update/{id}', [ApiProposalController::class, 'update']);
+Route::get('proposal/destroy/{id}', [ApiProposalController::class, 'destroy']);
+route::get('ormawa', [OrmawaController::class, 'list']);
+
+
+Route::post('user/register', [UserBeasiswaController::class, 'register']);
+Route::post('user/login', [UserBeasiswaController::class, 'login']);

@@ -2,14 +2,16 @@
 @section('content')
      <h3>Halaman List Diajukan Prodi</h3>
      <br>
-<table class="table table-bordered">
+     <div class="card-body">
+      <div class="table-responsive text-nowrap">
+      <table id="example" class="table table-bordered " style="width:100%">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nim</th>
-      <th scope="col">Nama</th>
-      <th scope="col">Jurusan</th>
-      <th scope="col">Action</th>
+      <th>No</th>
+      <th>Nim</th>
+      <th>Nama</th>
+      <th>Jurusan</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -20,33 +22,31 @@
             <td>{{$item->nama_mhs}} </td>
             <td>{{$item->jurusan->jurusan}} </td>
             <td>
-                <a class="btn btn-inverse-success btn-sm" href="{{ route('terima.beasiswa', ['id' => $item->id] ) }}"
-                    onclick="event.preventDefault();
-                    document.getElementById('terima-form').submit();" >
-                    Terima
+              @if(auth()->user()->level == 'admin')
+                <a class="btn btn btn-info btn-sm" href="{{ route('terima.beasiswa', ['id' => $item->id] ) }}"
+                    {{-- onclick="event.preventDefault();
+                    document.getElementById('terima-form').submit();" > --}}
+                    >Terima
                  </a>
-                 <form id="terima-form" action="{{ route('terima.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
+                 {{-- <form id="terima-form" action="{{ route('terima.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
                    @csrf
-                   </form>
-                   <a class="btn btn-inverse-danger btn-sm" href="{{ route('tolak.beasiswa', ['id' => $item->id] ) }}"
-                    onclick="event.preventDefault();
-                    document.getElementById('tolak-form').submit();" >
-                    Tolak
-                 </a>
-                 <form id="tolak-form" action="{{ route('tolak.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
-                   @csrf
-                   </form>
-                    
-                    
-                </form>
+                   </form>  --}}
+            </td>
+                @else
+              <td>
+                <a class="btn btn btn-info btn-sm" href="{{ route('daftar.beasiswa', ['id' => $item->id] ) }}" >
+                  Revisi
+               </a>
+              </td>
+                @endif
             </td>
         </tr>
     @empty
     @endforelse
   </tbody>
 </table>
+      </div>
+     </div>
 <br>
-<div>
-{{$data->links() }}
-</div>
+
 @endsection

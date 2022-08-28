@@ -22,6 +22,8 @@ class User extends Authenticatable
         'username',
         'password',
         'level',
+        'prodi_id',
+        'nim',
     ];
 
     /**
@@ -42,4 +44,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function prodi()
+    {
+        return $this->belongsTo(Jurusan::class,'prodi_id' );
+    }
+
+    
 }

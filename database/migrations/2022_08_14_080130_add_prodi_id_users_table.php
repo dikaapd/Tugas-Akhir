@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddKuotaToJurusanTable extends Migration
+class AddProdiIdUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddKuotaToJurusanTable extends Migration
      */
     public function up()
     {
-        Schema::table('jurusan', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
-            $table->integer('kuota');
+            $table->integer('prodi_id')->nullable();
         });
     }
 
@@ -26,9 +26,9 @@ class AddKuotaToJurusanTable extends Migration
      */
     public function down()
     {
-        Schema::table('jurusan', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('kuota');
+            $table->dropColumn('prodi_id');
         });
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormPengajuanProposalTable extends Migration
+class CreateFormPengajuanProposal extends Migration
 {
     /**
      * Run the migrations.
@@ -15,11 +15,6 @@ class CreateFormPengajuanProposalTable extends Migration
     {
         Schema::create('form_pengajuan_proposal', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_ormawa');
-            $table->string('tujuan_kegiatan');
-            $table->date('tgl_awalkegiatan');
-            $table->date('tgl_akhirkegiatan');
-            $table->integer('anggaran_dana');
             $table->timestamps();
         });
     }

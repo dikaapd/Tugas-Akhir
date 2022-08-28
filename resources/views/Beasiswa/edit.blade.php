@@ -19,27 +19,67 @@
  <!-- End plugin css for this page -->
  <!-- inject:css -->
  @section('content')
- 
-
-      <div class="col-12 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <form action="{{ route('update_data', $data->id) }}" method="POST" enctype="multipart/form-data">
-              @method('PUT')
-              @csrf
-              <h4 class="card-title">From Update Data Beasiswa</h4>
-              <div class="form-group">
-            <form class="forms-sample">
-                <label for="exampleInputName1">NIM</label>
-                <input type="text" class="form-control" name="nim" value="{{$data->nim}}" id="nim" placeholder="Nim">
+ <div class="col-12 ">
+  <div class="card">
+    <div class="card-body">
+      <form action="{{ route('update_data', $data->id) }}" method="POST" enctype="multipart/form-data">
+        @method('PUT')
+        @csrf
+      <h4 class="card-title">Input Data Mahasiswa</h4>
+      <form class="form-sample">
+        <p class="card-description">
+        </p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">NIM</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="{{$data->nim}}" name="nim" id="nim" placeholder="Nim">
               </div>
-              <div class="form-group">
-                <label for="exampleInputName3">Nama</label>
-                <input type="text" class="form-control" name="nama_mhs" value="{{$data->nama_mhs}}" id="nama_mhs" placeholder="Nama Lengkap">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Nama Lengkap</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="{{$data->nama_mhs}}" name="nama_mhs" id="nama_mhs" placeholder="Nama Lengkap">
               </div>
-              <div class="form-group">
-                <label for="exampleSelectGender">Pilih Prodi</label>
-                  <select class="form-control" name="jurusan_id"  id="jurusan_id">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Jenis Kelamin</label>
+              <div class="col-sm-9">
+                <select class="form-control" name="jenkel" id="jenkel" placeholder="jenkel">
+                  <option > Jenis Kelamin</option>
+                  @if($data->jenkel == "Pria")
+                  <option value="Pria" selected>Pria</option>
+                  <option value="Wanita">Wanita</option>
+                  @else
+                  <option value="Pria">Pria</option>
+                  <option value="Wanita" selected>Wanita</option>
+                  @endif
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Tempat Tanggal Lahir</label>
+              <div class="col-sm-9">
+                <input class="form-control" name="ttl" value="{{$data->ttl}}" id="ttl" placeholder="dd/mm/yyyy"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Jurusan</label>
+              <div class="col-sm-9">
+                <select class="form-control"  name="jurusan_id" id="jurusan_id">
                     <option disable value> Prodi </option>
                     @foreach ($jurusan as $item)
                     @if($data->jurusan_id == $item->id)
@@ -47,55 +87,100 @@
                     @endif
                     <option value="{{$item->id}}">{{$item->jurusan}}</option>
                     @endforeach
-                  </select>
-                </div>
-              <div class="form-group">
-                <label for="exampleInputGaji">Gaji Orang Tua</label>
-                <input type="text" class="form-control" name="gaji_ortu" value="{{$data->gaji_ortu}}" id="gaji_ortu" placeholder="Gaji">
+                </select>
               </div>
-              <div class="form-group">
-                <label>File upload</label>
-                <div class="input-group col-xs-12">
-                  <img src="{{ asset('upload/'.$data->slip_gaji)}}" width="100px" alt="">
-                  <input type="file" name="file" id="file" class="form-control file-upload-info"  placeholder="Upload Image">
-                  <span class="input-group-append">
-                    <button class="file-upload-browse btn btn-primary" type="button">Upload Struk Gaji</button>
-                  </span>
-                </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">IPK Terakhir</label>
+              <div class="col-sm-9">
+                <input class="form-control" name="ipk" value="{{$data->ipk}}" id="ipk">
               </div>
-              <div class="form-group">
-                <label for="exampleInputCity1">Tannggungan</label>
-                <input type="text" class="form-control" name="tanggungan" value="{{$data->tanggungan}}"  id="tanggungan" placeholder="Tanggungan">
-              </div>
-              <button type="submit" class="btn btn-primary mr-2">Submit</button>
-            </form>
+            </div>
           </div>
         </div>
-      </div>
-      @endsection
-
-  <!-- content-wrapper ends -->
-
-  <!-- partial -->
+        <p class="card-description">
+        </p>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Tahun Ajaran</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="{{$data->thn_ajaran}}" name="thn_ajaran">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">No Hp</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="{{$data->nohp}}" name="nohp" id="nohp" placeholder="No Hp">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Nama Orang Tua</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="{{$data->nama_ortu}}" name="nama_ortu" id="nama_ortu" placeholder="Nama Orang Tua">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">NIK</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="{{$data->nik}}" name="nik" id="nik" placeholder="Nomer Induk Kewarganegaraan">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Gaji Orang Tua</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="{{$data->gaji_ortu}}" name="gaji_ortu" id="gaji_ortu" placeholder="Gaji">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Tanggungan</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="{{$data->tanggungan}}" name="tanggungan"  id="tanggungan" placeholder="Tanggungan">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Alamat</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="{{$data->alamat}}" name="alamat" id="alamat">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Struk Gaji</label>
+              <div class="col-sm-9">
+                <img src="{{ asset('data-slip-gaji/'.$data->slip_gaji)}}" width="100px" alt="">
+                <input type="file" name="file" id="file" class="form-control file-upload-info"  placeholder="Upload Image">
+                <span class="input-group-append">
+              </div>
+            </div>
+          </div>
+        </div>
+        @if(auth()->user()->level == 'prodi')
+        <a href="{{url('/beasiswa')}}"  class="btn btn-secondary" >Close</a>
+        @else
+        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+        @endif
+      </form>
+    </div>
+  </div>
 </div>
-<!-- main-panel ends -->
-</div>
-<!-- page-body-wrapper ends -->
-</div>  
-   <!-- Plugin js for this page -->
-   <script src="{{asset('layout/vendors/js/vendor.bundle.base.js')}}"></script>
-   <script src="{{asset('layout/vendors/typeahead.js/typeahead.bundle.min.js')}}"></script>
-   <script src="{{asset('layout/vendors/select2/select2.min.js')}}"></script>
-   <!-- End plugin js for this page -->
-    <!-- inject:js -->
-  <script src="{{asset('layout/js/off-canvas.js')}}"></script>
-  <script src="{{asset('layout/js/hoverable-collapse.js')}}"></script>
-  <script src="{{asset('layout/js/template.js')}}"></script>
-  <script src="{{asset('layout/js/settings.js')}}"></script>
-  <script src="{{asset('layout/js/todolist.js')}}"></script>
-   <!-- Custom js for this page-->
-   <script src="{{asset('layout/js/file-upload.js')}}"></script>
-   <script src="{{asset('layout/js/typeahead.js')}}"></script>
-   <script src="{{asset('layout/js/select2.js')}}"></script>
- 
-
+ @endsection
