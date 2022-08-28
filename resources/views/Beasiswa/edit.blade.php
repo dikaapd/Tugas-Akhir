@@ -91,15 +91,23 @@
               </div>
             </div>
           </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">IPK Terakhir</label>
+              <div class="col-sm-9">
+                <input class="form-control" name="ipk" value="{{$data->ipk}}" id="ipk">
+              </div>
+            </div>
+          </div>
         </div>
         <p class="card-description">
         </p>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group row">
-              <label class="col-sm-3 col-form-label">Alamat</label>
+              <label class="col-sm-3 col-form-label">Tahun Ajaran</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" value="{{$data->alamat}}" name="alamat" id="alamat">
+                <input type="text" class="form-control" value="{{$data->thn_ajaran}}" name="thn_ajaran">
               </div>
             </div>
           </div>
@@ -125,7 +133,7 @@
             <div class="form-group row">
               <label class="col-sm-3 col-form-label">NIK</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" value="{{$data->nik}}" name="nik" id="nik" placeholder="Nomer Induk Kewarganegaraan">>
+                <input type="text" class="form-control" value="{{$data->nik}}" name="nik" id="nik" placeholder="Nomer Induk Kewarganegaraan">
               </div>
             </div>
           </div>
@@ -144,6 +152,14 @@
               <label class="col-sm-3 col-form-label">Tanggungan</label>
               <div class="col-sm-9">
                 <input type="text" class="form-control" value="{{$data->tanggungan}}" name="tanggungan"  id="tanggungan" placeholder="Tanggungan">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Alamat</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" value="{{$data->alamat}}" name="alamat" id="alamat">
               </div>
             </div>
           </div>

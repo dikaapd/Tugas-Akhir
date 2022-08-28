@@ -10,21 +10,21 @@
             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="{{asset('layout/images/2.jpg')}}" class="d-block w-100" alt="...">
+                  <img src="{{asset('layout/images/satu.jpg')}}" class="d-block w-100" alt="...">
                   <div class="carousel-caption d-none d-md-block">
                     <h5>First slide label</h5>
                     <p>Some representative placeholder content for the first slide.</p>
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <img src="{{asset('layout/images/1.jpg')}}"  class="d-block w-100" alt="...">
+                  <img src="{{asset('layout/images/dua.jpg')}}"  class="d-block w-100" alt="...">
                   <div class="carousel-caption d-none d-md-block">
                     <h5>Second slide label</h5>
                     <p>Some representative placeholder content for the second slide.</p>
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <img src="{{asset('layout/images/4.jpg')}}" class="d-block w-100" alt="...">
+                  <img src="{{asset('layout/images/tiga.jpg')}}" class="d-block w-100" alt="...">
                   <div class="carousel-caption d-none d-md-block">
                     <h5>Third slide label</h5>
                     <p>Some representative placeholder content for the third slide.</p>

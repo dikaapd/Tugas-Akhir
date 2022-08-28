@@ -11,7 +11,6 @@
 <table class="table table-hover " style="width:100%">
   <thead>
     <tr>
-      <th scope="col">No</th>
       <th scope="col">Nim</th>
       <th scope="col">Nama</th>
       <th scope="col">Jurusan</th>
@@ -23,7 +22,6 @@
     @forelse ($data as $key => $item )
     @if(auth()->user()->nim == $item->nim)
         <tr>
-            <td>{{$key + 1}} </td>
             <td>{{$item->nim}} </td>
             <td>{{$item->nama_mhs}} </td>
             <td>{{$item->jurusan->jurusan}} </td>

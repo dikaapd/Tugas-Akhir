@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() {
   route::put('/kuota/{id}', [App\Http\Controllers\JurusanController::class, 'update'])->name('update_kuota');
   route::post('/usercontrol/postregistrasi', [App\Http\Controllers\LoginController::class, 'postregistrasimodal'])->name('postregistrasimodal');
   route::get('/usercontrol',  [App\Http\Controllers\LoginController::class, 'index1']);
-  route::post('/terima/{id}',  [App\Http\Controllers\BeasiswaController::class, 'terima'])->name('terima.beasiswa');
+  route::get('/terima/{id}',  [App\Http\Controllers\BeasiswaController::class, 'terima'])->name('terima.beasiswa');
 });
 
 
@@ -52,14 +52,14 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,prodi']], function() {
   route::get('/pengumuman',  [App\Http\Controllers\BeasiswaController::class, 'index2']);
   route::get('/pengumuman/export',  [App\Http\Controllers\BeasiswaController::class, 'pengumumanexport'])->name('export');
   route::get('/ajukan/{id}',  [App\Http\Controllers\BeasiswaController::class, 'ajukan'])->name('ajukan.beasiswa');
-  route::post('/daftar/{id}',  [App\Http\Controllers\BeasiswaController::class, 'daftar'])->name('daftar.beasiswa');
-  route::post('/tolak/{id}',  [App\Http\Controllers\BeasiswaController::class, 'tolak'])->name('tolak.beasiswa');
+  route::get('/daftar/{id}',  [App\Http\Controllers\BeasiswaController::class, 'daftar'])->name('daftar.beasiswa');
+  route::get('/tolak/{id}',  [App\Http\Controllers\BeasiswaController::class, 'tolak'])->name('tolak.beasiswa');
   route::delete('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class,'destroy']);
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin,mahasiswa,prodi,']], function() {
    route::get('/beasiswa/create', [App\Http\Controllers\BeasiswaController::class, 'create']);
-  route::post('/beasiswa/store ' , [App\Http\Controllers\BeasiswaController::class, 'store']);
+  route::post('/beasiswa/store ' , [App\Http\Controllers\BeasiswaController::class, 'store']);  
   route::get('/beasiswa/{id}', [App\Http\Controllers\BeasiswaController::class, 'show']);
   route::get('/pengumuman',  [App\Http\Controllers\BeasiswaController::class, 'index2']);
   route::get('/beasiswa',  [App\Http\Controllers\BeasiswaController::class, 'index']);

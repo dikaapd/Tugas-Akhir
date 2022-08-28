@@ -5,8 +5,8 @@
       <div class="row">
     <!--Grid column-->
     <div class="col-md-6 mb-4">
-      <a href="#" class="btn btn-success mr-2" data-toggle="modal" data-target="#ModalCreate">
-        <i class='fas fa-user-plus'></i>
+      <a href="#" class="btn btn-success sm-2" data-toggle="modal" data-target="#ModalCreate">
+        <i class='mdi mdi-account-multiple-plus'></i>
         Tambah User Prodi</a>
     </div>
       </div>
@@ -41,7 +41,7 @@
             
               <td>
                     <a href="usercontrol/{{$item->id}}" class="btn btn-outline-dark">
-                      <i class='fas fa-user-edit'></i>
+                      <i class='mdi mdi-account-convert'></i>
                       Reset Password
                     </a>
                     

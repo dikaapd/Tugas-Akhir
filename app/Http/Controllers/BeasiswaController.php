@@ -36,7 +36,7 @@ class BeasiswaController extends Controller
             $data = Beasiswa::leftjoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
             ->select('form_pengajuan_beasiswa.*')
             ->where('status' , '=' , "daftar")
-            ->where('form_pengajuan_beasiswa.jurusan_id', auth()->user()->prodi_id )->paginate();
+            ->where('form_pengajuan_beasiswa.jurusan_id', auth()->user()->prodi_id )->get();
             return view('Beasiswa.prodidash', compact('data'));
         }  else {
             
@@ -54,8 +54,17 @@ class BeasiswaController extends Controller
 
     public function index1()
     {
-        $data = Beasiswa::where('status' , '=' , "proses")->paginate();
+        if(auth()->user()->level == 'prodi') {
+
+        $data = Beasiswa::leftjoin('jurusan', 'jurusan.id', '=', 'form_pengajuan_beasiswa.jurusan_id')
+        ->select('form_pengajuan_beasiswa.*')
+        ->where('status' , '=' , "proses")
+        ->where('form_pengajuan_beasiswa.jurusan_id', auth()->user()->prodi_id )->paginate();
+        return view('Beasiswa.listprodi', compact('data'));
+     } else {
+        $data = Beasiswa::where('status' , '=' , "proses" )->paginate();
         return view('Beasiswa.listdiajukan', compact('data'));
+     }
         
     
     }
@@ -99,8 +108,7 @@ class BeasiswaController extends Controller
             ELSE (jurusan.kuota - COUNT(form_pengajuan_beasiswa.id))
         END AS kuota_tersisa
         FROM form_pengajuan_beasiswa INNER JOIN jurusan ON form_pengajuan_beasiswa.jurusan_id = jurusan.id
-        WHERE (form_pengajuan_beasiswa.status = 'proses' OR form_pengajuan_beasiswa.status = 'diterima' 
-        OR form_pengajuan_beasiswa.status = 'ditolak') AND jurusan.id =   $jurusan_id")[0];
+        WHERE form_pengajuan_beasiswa.status = 'proses'  AND jurusan.id =   $jurusan_id")[0];
     }
 
     public function ajukan($id, Request $request)                                                                                                                    
@@ -142,6 +150,7 @@ class BeasiswaController extends Controller
                     'status' => 'ditolak',
                     'tanggal_proses' => date('Y-m-d H:i:s')
                 ]);
+                Alert::success('Berhasil Ditolak');
         return redirect()->back();
     
     }
@@ -153,6 +162,8 @@ class BeasiswaController extends Controller
                     'status' => 'daftar',
                     'tanggal_proses' => date('Y-m-d H:i:s')
                 ]);
+                Alert::info('Revisi Berhasil Dilakukan');
+        
         return redirect()->back();
     
     }
@@ -179,9 +190,16 @@ class BeasiswaController extends Controller
      */
     public function store(Request $request)
     {
-            $request->validate([
+        $messages = [
+            'required' => 'Tidak Boleh Kosong',
+            'min' => 'Minimal 5 Karakter',
+            'max' => 'Melebihi Max Karatker',
+        ];
+
+            // $request->validate([
+         $this->validate($request,[
                 'nim' => 'required',
-                'nama_mhs' => 'required',
+                'nama_mhs' => 'min:5|max:20',
                 'jurusan_id' => 'required',
                 'gaji_ortu' => 'required',
                 'tanggungan' => 'required',
@@ -191,8 +209,10 @@ class BeasiswaController extends Controller
                 'alamat' => 'required',
                 'ttl' => 'required',
                 'jenkel' => 'required',
+                'ipk' => 'required',
+                'thn_ajaran' => 'required',
                 'file' => 'required|mimes:png,jpeg,jpg|max:2048'
-            ]);
+            ],$messages);
                 
         $fileName = date('d-m-Y').'_'.$request->file('file')->getClientOriginalName();  
         $path = $request->file->move(public_path('data-slip-gaji'), $fileName);
@@ -211,6 +231,8 @@ class BeasiswaController extends Controller
                 'alamat' => $request->alamat,
                 'ttl' => $request->ttl,
                 'jenkel' => $request->jenkel,
+                'ipk' => $request->ipk,
+                 'thn_ajaran' => $request->thn_ajaran,
                 'slip_gaji' => $fileName,
             ]);
 
@@ -235,7 +257,7 @@ class BeasiswaController extends Controller
         //$data = Beasiswa::where('id','=', $id)->get();
         $jurusan = Jurusan::all();
         $data = DB::table('form_pengajuan_beasiswa')->where('id', $id)->first();
-        return view('beasiswa.show', compact('data'));
+        return view('beasiswa.show', compact('data','jurusan'));
     }
 
     /**
@@ -272,6 +294,8 @@ class BeasiswaController extends Controller
                 'alamat' => 'required',
                 'ttl' => 'required',
                 'jenkel' => 'required',
+                'ipk' => 'required',
+                'thn_ajaran' => 'required',
                 'file ' => 'mimes:png,jpeg,jpg|max:2048'
             ]);
             $jurusan = Jurusan::all();
@@ -296,6 +320,8 @@ class BeasiswaController extends Controller
                     'alamat' => $request->alamat,
                     'ttl' => $request->ttl,
                     'jenkel' => $request->jenkel,
+                    'ipk' => $request->ipk,
+                    'thn_ajaran' => $request->thn_ajaran,
                     'slip_gaji' => $fileName,
                 ]);
                 return redirect ('beasiswa') ;
@@ -314,6 +340,8 @@ class BeasiswaController extends Controller
                     'alamat' => $request->alamat,
                     'ttl' => $request->ttl,
                     'jenkel' => $request->jenkel,
+                    'ipk' => $request->ipk,
+                    'thn_ajaran' => $request->thn_ajaran,
                     
                 ]);
                 DB::table('users') -> where('id', auth()->user()->id) 
@@ -322,7 +350,7 @@ class BeasiswaController extends Controller
                 ]);
                 
 
-                Alert::success('Selamat', 'Data Berhasil Diubah');
+                Alert::success( 'Data Berhasil Diubah');
 
             return redirect ('beasiswa') ;
     }

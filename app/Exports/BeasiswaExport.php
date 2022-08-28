@@ -31,3 +31,13 @@ class BeasiswaExport implements FromCollection, WithHeadings
         return ["Nama", "Jurusan", "NIM", "TTL", "Status"];
     }
 }
+
+// $shares = DB::table('shares')
+//     ->join('users', 'users.id', '=', 'shares.user_id')
+//     ->join('followers', 'followers.user_id', '=', 'users.id')
+//     ->where('followers.follower_id', '=', 3)
+//     ->get();
+
+// $export = DB::table('pendaftaran')
+// ->join('users', 'users.id', '=', 'pendaftaran.user_id')
+// ->join('pendaftaran_details', 'pendaftaran_details.pendaftaran_id' , "=", 'pendaftaran.id' )

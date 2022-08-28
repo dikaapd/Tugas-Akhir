@@ -24,20 +24,20 @@
             <td>
               @if(auth()->user()->level == 'admin')
                 <a class="btn btn btn-info btn-sm" href="{{ route('terima.beasiswa', ['id' => $item->id] ) }}"
-                    {{-- onclick="event.preventDefault();
-                    document.getElementById('terima-form').submit();" > --}}
-                    >Terima
+                    onclick="event.preventDefault();
+                    document.getElementById('terima-form').submit();" >
+                    Terima
                  </a>
-                 {{-- <form id="terima-form" action="{{ route('terima.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
+                 <form id="terima-form" action="{{ route('terima.beasiswa', ['id' => $item->id] ) }}" method="POST" style="display: none;">
                    @csrf
-                   </form>  --}}
-            </td>
+                   </form> 
+                </form>
                 @else
-              <td>
-                <a class="btn btn btn-info btn-sm" href="{{ route('daftar.beasiswa', ['id' => $item->id] ) }}" >
+                <a class="btn btn btn-info btn-sm" href="{{ route('daftar.beasiswa', ['id' => $item->id] ) }}">
                   Revisi
                </a>
-              </td>
+               
+              </form>
                 @endif
             </td>
         </tr>

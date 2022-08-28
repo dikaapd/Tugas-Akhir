@@ -21,8 +21,12 @@ class LoginController extends Controller
         //dd($request->all());
         if (Auth::attempt($request->only('username','password'))){
             return redirect('/');
-        }
+        } else {
+            Alert::warning('Gagal', 'Username atau Password salah');
+        
         return redirect ('login');
+
+        }
 
     }
 
@@ -38,6 +42,18 @@ class LoginController extends Controller
 
     public function postregistrasi(Request $request){
         //dd($request -> all());
+        $messages = [
+            'required' => 'Tidak Boleh Kosong',
+            'min' => 'Minimal 5 Karakter',
+            'max' => 'Melebihi Max Karatker',
+        ];
+
+            // $request->validate([
+         $this->validate($request,[
+                'nama' => 'required',
+                'username' => 'min:5|max:20',
+                'password' => 'required',
+            ],$messages);
         
         User::create([
             'nama' => $request->nama,
@@ -45,7 +61,8 @@ class LoginController extends Controller
             'password' => bcrypt($request->password),
             'remember_token' => Str::random(60),
         ]);
-        Alert::success('Selamat', 'Berhasil Melakukan Registrasi');
+
+        Alert::success('Selamat', 'Account Berhasil Dibuat');
 
         return redirect ('login');
    }

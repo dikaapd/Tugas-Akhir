@@ -1,6 +1,6 @@
 @extends('template.app')
 @section('content')
-<div class="container">
+
 <h3> Pengumuman Beasiswa</h3>
 <br>
 
@@ -9,8 +9,7 @@
     <i class='fas fa-file-download'></i>
     EXPORT</button>
   </form>
-     <div class="card-body">
-      <div class="table-responsive text-nowrap">
+  <br>
       <table id="example" class="table table-bordered " style="width:100%">
           <thead>
             <tr>
@@ -36,16 +35,4 @@
             @endforelse
   </tbody>
 </table>
-<div>
-  
-</div>
-</div>
-</div>
-</div>
-{{-- @else
-<p class="text-center">data tidak ada</p>
-@endif --}}
-{{-- <div>
-  {{ $data->links() }}
-  </div> --}}
 @endsection

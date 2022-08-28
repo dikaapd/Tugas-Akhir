@@ -29,15 +29,24 @@
               <div class="brand-logo">
                 {{-- <img src="{{asset('layout/images/logo.svg')}}" alt="logo"> --}}
               </div>
+              <img src="{{asset('layout/images/2.png')}}" alt="logo" width="100%">
+              <br>
+              <br>
               <h6 class="font-weight-light">Daftar untuk bisa login di Kemahasiswaan</h6>
               <form action="{{ route('postregistrasi')}}" method="POST">
                 {{ csrf_field() }}
               <form class="pt-3">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" name = "nama" placeholder="Full Name">
+                  <input type="text" class="form-control form-control-lg" name = "nama" placeholder="Name">
+                  @error('nama')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="form-group">
                   <input type="username" class="form-control form-control-lg" name="username"  placeholder="Username">
+                  @error('username')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" name="password" placeholder="Password">

@@ -70,6 +70,12 @@
           <span class="menu-title">Pengumuman</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('logout')}}">
+          <i class="mdi mdi-logout"></i>
+          <span class="menu-title">Logout</span>
+        </a>
+      </li>
 
       @else
 
